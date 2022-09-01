@@ -1,12 +1,12 @@
-// Required Modules
-require('dotenv').config();
+// Requiered Modules
 const express = require('express');
 const engine = require('ejs-mate');
+const { application } = require('express');
 const path = require('path');
 const dgram = require('dgram');
-
 const cnx = require('./cnx');
-const moment = require("moment");
+const mysql = require("mysql");
+const {getgpsdata} = require("./cnx");
 
 const app = express();
 
@@ -15,40 +15,38 @@ app.engine('ejs', engine);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views' ));
 
+const conexion = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'HecNoDi152000',
+    database: 'gpsdata'
+});
+
 
 // Setting UDP Sniffer
 const udp = dgram.createSocket('udp4');
 const udpHost = "";
-const udpPort = parseInt(process.env.UDP_PORT);
-
-
+const udpPort = 50000;
 // initialization
-udp.on('listening', () => {
-console.log("UDP Server:  ", udpPort);
-});
 
-let data = [0, 0, 0, 0];
-let data_bk = [0, 0, 0, 0];
-udp.on('message', (msg) =>{
+udp.on('listening', () => {
+    console.log("UDP Server on: ", udpPort);
+});
+var data = ["0","0","0","0"];
+udp.on('message', (msg,rinfo) =>{
     data = msg.toString().split("\n");
-    if (data_bk[2] !== data[2]){
-        cnx.addGpsData(data[3],data[2],data[0],data[1]);}
-    data_bk = data;
+    console.log("Received data:", data);
 });
 udp.bind(udpPort,udpHost);
-
-
 app.get("/data", (req,res) =>{
-    cnx.pool.query("SELECT fecha, hora, latitud, longitud FROM gps_data ORDER BY ID DESC LIMIT 1", (err,rows) => {
-            res.json({
-                "lat": rows[0].latitud,
-                "lon": rows[0].longitud,
-                "tm":  rows[0].hora,
-                "dt":  moment(rows[0].fecha).format("DD/MM/YYYY"),
-            });
+    res.json({
+        "lat": data[0],
+        "lon": data[1],
+        "tm":  data[2],
+        "dt":  data[3],
     });
+    cnx.addgpsdata(data[3],data[2],data[0],data[1]);
 });
-
 
 
 //routes
@@ -62,4 +60,6 @@ app.listen(port, () => {
     console.log("server on port: ",port)
 });
 
-cnx.connect();
+cnx.conectar();
+
+app.use();
