@@ -5,16 +5,15 @@ CREATE DATABASE gpsdata;
 use gpsdata;
 
 --creating a table
-CREATE TABLE gps_data(
-         id INT(7) UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
-         fecha DATE NOT NULL,
-         hora TIME NOT NULL,
-         latitud VARCHAR(13) NOT NULL,
-         longitud VARCHAR(13) NOT NULL
-);
+CREATE TABLE data(
+    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    fecha VARCHAR(30) NOT NULL,
+    hora VARCHAR(30) NOT NULL,
+    latitud VARCHAR(30) NOT NULL,
+    longitud VARCHAR(30) NOT NULL
 
 -- To show all tables
 SHOW TABLES;
 
 -- Describe tables
-DESCRIBE gps_data;
+DESCRIBE data;
