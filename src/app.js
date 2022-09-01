@@ -1,17 +1,34 @@
+// Requiered Modules
 const express = require('express');
 const engine = require('ejs-mate');
 const { application } = require('express');
 const path = require('path');
-// UDP SERVER LISTENING
 const dgram = require('dgram');
-const udp = dgram.createSocket('udp4');
+const cnx = require('./cnx');
+const mysql = require("mysql");
+const {getgpsdata} = require("./cnx");
 
+const app = express();
+
+// setting the server
+app.engine('ejs', engine);
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views' ));
+
+const conexion = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'HecNoDi152000',
+    database: 'gpsdata'
+});
+
+
+// Setting UDP Sniffer
+const udp = dgram.createSocket('udp4');
 const udpHost = "";
 const udpPort = 50000;
 // initialization
-const app = express();
-const port = 80;
-//
+
 udp.on('listening', () => {
     console.log("UDP Server on: ", udpPort);
 });
@@ -28,20 +45,21 @@ app.get("/data", (req,res) =>{
         "tm":  data[2],
         "dt":  data[3],
     });
+    cnx.addgpsdata(data[3],data[2],data[0],data[1]);
 });
 
-// setting the server 
-app.engine('ejs', engine);
-app.set('view engine', 'ejs'); 
-app.set('views', path.join(__dirname, 'views' ));
 
 //routes
 app.use(require('./routes/index'));
-
 //static files
 app.use(express.static( path.join(__dirname, 'public' )));
 
 // starting the server
+const port = 80;
 app.listen(port, () => {
     console.log("server on port: ",port)
 });
+
+cnx.conectar();
+
+app.use();
