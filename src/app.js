@@ -1,12 +1,10 @@
 // Requiered Modules
+require('dotenv').config();
 const express = require('express');
 const engine = require('ejs-mate');
-const { application } = require('express');
 const path = require('path');
 const dgram = require('dgram');
 const cnx = require('./cnx');
-const mysql = require("mysql");
-const {getgpsdata} = require("./cnx");
 
 const app = express();
 
@@ -15,18 +13,11 @@ app.engine('ejs', engine);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views' ));
 
-const conexion = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'HecNoDi152000',
-    database: 'gpsdata'
-});
-
 
 // Setting UDP Sniffer
 const udp = dgram.createSocket('udp4');
 const udpHost = "";
-const udpPort = 50000;
+const udpPort = process.env.UDP_PORT;
 // initialization
 
 udp.on('listening', () => {
@@ -61,5 +52,3 @@ app.listen(port, () => {
 });
 
 cnx.conectar();
-
-app.use();
