@@ -1,10 +1,10 @@
 const mysql = require("mysql");
 const e = require("express");
 const conexion = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'HecNoDi152000',
-    database: 'gpsdata'
+    host: process.env.HOST,
+    user: process.env.USER,
+    password: process.env.PASS,
+    database: process.env.DB,
 });
 
 const conectar = () =>{
