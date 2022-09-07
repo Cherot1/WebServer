@@ -1,5 +1,4 @@
 const mysql = require("mysql");
-const e = require("express");
 const conexion = mysql.createConnection({
     host: process.env.HOST,
     user: process.env.USER,
@@ -18,7 +17,7 @@ const addgpsdata = (date, time, latitude, longitude) => {
     //conectar();
     let query = "INSERT INTO data (fecha,hora,latitud,longitud)"
         +"VALUES ('"+date+"','"+time+"','"+latitude+"','"+longitude+"')";
-    conexion.query(query, function (err, result) {
+    conexion.query(query, function (err) {
         if(err) throw err;
     })
 }
