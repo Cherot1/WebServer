@@ -3,9 +3,9 @@ const map = L.map('map-template').setView([11.022, -74.869], 13);
 const tileURL = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
 L.tileLayer(tileURL).addTo(map);
 
-/*marker = L.marker([11.022, -74.869],13)
+marker = L.marker([11.022, -74.869],13)
 marker.bindPopup('11.022 | -74.869');
-map.addLayer(marker);*/
+map.addLayer(marker);
 
 async function getData(){
     const response = await fetch("./data", {});
