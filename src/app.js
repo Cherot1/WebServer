@@ -5,7 +5,6 @@ const engine = require('ejs-mate');
 const path = require('path');
 const dgram = require('dgram');
 const cnx = require('./cnx');
-const mysql = require("mysql");
 
 const app = express();
 
@@ -26,9 +25,12 @@ udp.on('listening', () => {
 });
 let data = [null, null, null, null];
 let data_bk = [null, null, null, null];
-udp.on('message', (msg,rinfo) =>{
+udp.on('message', (msg) =>{
     data = msg.toString().split("\n");
     console.log("Received data:", data);
+    if (data_bk[2] !== data[2]){
+        cnx.addgpsdata(data[3],data[2],data[0],data[1]);}
+    data_bk = data;
 });
 udp.bind(udpPort,udpHost);
 app.get("/data", (req,res) =>{
@@ -38,9 +40,7 @@ app.get("/data", (req,res) =>{
         "tm":  data[2],
         "dt":  data[3],
     });
-    if (data_bk[2] !== data[2]){
-        cnx.addgpsdata(data[3],data[2],data[0],data[1]);}
-    data_bk = data;
+
 });
 
 
