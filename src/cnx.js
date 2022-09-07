@@ -1,9 +1,9 @@
 const mysql = require("mysql");
 const conexion = mysql.createConnection({
-    host: process.env.HOST,
-    user: process.env.USER,
-    password: process.env.PASS,
-    database: process.env.DB,
+    host: process.env.RDS_HOST,
+    user: process.env.RDS_USER,
+    password: process.env.RDS_PASS,
+    database: process.env.RDS_DB,
 });
 
 const conectar = () =>{
@@ -15,7 +15,7 @@ const conectar = () =>{
 
 const addgpsdata = (date, time, latitude, longitude) => {
     //conectar();
-    let query = "INSERT INTO data (fecha,hora,latitud,longitud)"
+    let query = "INSERT INTO gps_data (fecha,hora,latitud,longitud)"
         +"VALUES ('"+date+"','"+time+"','"+latitude+"','"+longitude+"')";
     conexion.query(query, function (err) {
         if(err) throw err;
