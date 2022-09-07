@@ -1,10 +1,11 @@
-// Requiered Modules
+// Required Modules
 require('dotenv').config();
 const express = require('express');
 const engine = require('ejs-mate');
 const path = require('path');
 const dgram = require('dgram');
 const cnx = require('./cnx');
+const mysql = require("mysql");
 
 const app = express();
 
@@ -17,13 +18,14 @@ app.set('views', path.join(__dirname, 'views' ));
 // Setting UDP Sniffer
 const udp = dgram.createSocket('udp4');
 const udpHost = "";
-const udpPort = process.env.UDP_PORT;
+const udpPort = parseInt(process.env.UDP_PORT);
 // initialization
 
 udp.on('listening', () => {
     console.log("UDP Server on: ", udpPort);
 });
-var data = [null,null,null,null];
+let data = [null, null, null, null];
+let data_bk = [null, null, null, null];
 udp.on('message', (msg,rinfo) =>{
     data = msg.toString().split("\n");
     console.log("Received data:", data);
@@ -36,7 +38,9 @@ app.get("/data", (req,res) =>{
         "tm":  data[2],
         "dt":  data[3],
     });
-    cnx.addgpsdata(data[3],data[2],data[0],data[1]);
+    if (data_bk[2] !== data[2]){
+        cnx.addgpsdata(data[3],data[2],data[0],data[1]);}
+    data_bk = data;
 });
 
 
