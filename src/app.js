@@ -23,8 +23,8 @@ const udpPort = parseInt(process.env.UDP_PORT);
 udp.on('listening', () => {
     console.log("UDP Server on: ", udpPort);
 });
-let data = [null, null, null, null];
-let data_bk = [null, null, null, null];
+let data = [0, 0, 0, 0];
+let data_bk = [0, 0, 0, 0];
 udp.on('message', (msg) =>{
     data = msg.toString().split("\n");
     console.log("Received data:", data);
