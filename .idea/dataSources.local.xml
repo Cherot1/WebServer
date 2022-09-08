@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal" created-in="WS-222.3739.57">
+<<<<<<< HEAD
     <data-source name="@localhost" uuid="7c52ce83-52dd-4b44-a28c-1314e698fb54">
       <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL" exact-version="0" />
       <secret-storage>master_key</secret-storage>
@@ -9,6 +10,12 @@
           <node kind="schema" negative="1" />
         </introspection-scope>
       </schema-mapping>
+=======
+    <data-source name="@localhost" uuid="73890cee-4b58-412e-9677-2624c18b7a26">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL" exact-version="0" />
+      <secret-storage>forget</secret-storage>
+      <schema-mapping />
+>>>>>>> b598cd1 (xd)
     </data-source>
   </component>
 </project>
