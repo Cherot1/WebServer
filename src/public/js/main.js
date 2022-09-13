@@ -17,7 +17,6 @@ async function getData(){
     document.getElementById("lon").innerHTML = await `${responseJson.lon}`;
 
     if(responseJson.lat != 0){
-        map.setView([parseFloat(responseJson.lat), parseFloat(responseJson.lon)], 13);
         map.removeLayer(marker);
         marker = new L.marker([parseFloat(responseJson.lat), parseFloat(responseJson.lon)]);
         marker.bindPopup(responseJson.lat+" | "+responseJson.lon);
