@@ -56,6 +56,21 @@ h1{
     position: relative;
 }
 
+.wrapper .sidebar table th{
+    width: 110px;
+}
+
+.wrapper .sidebar button {
+    background-color: #d3d9f4;
+    border-radius: 5px;
+    font-size: 17px;
+    padding: 6px 18px;
+    font-weight: bold;
+    position: absolute;
+    margin-left: 100px;
+    margin-top: 10%;
+}
+
 .wrapper .sidebar #table2{
     border-bottom: 1px solid #7689df;
 }

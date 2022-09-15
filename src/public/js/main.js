@@ -11,6 +11,11 @@ var penguinMarker = L.icon({
 
 marker = L.marker([11.022, -74.869], {icon: penguinMarker})
 
+let lat = 0;
+let lon = 0;
+
+
+
 async function getData(){
     const response = await fetch("./data", {});
     let responseJson = await response.json();
@@ -19,6 +24,8 @@ async function getData(){
     document.getElementById("time").innerHTML = await `${responseJson.tm}`;
     document.getElementById("lat").innerHTML = await `${responseJson.lat}`;
     document.getElementById("lon").innerHTML = await `${responseJson.lon}`;
+    lat = parseFloat(responseJson.lat);
+    lon = parseFloat(responseJson.lon);
 
     if(responseJson.lat != 0){
         map.removeLayer(marker);
