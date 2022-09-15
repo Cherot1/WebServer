@@ -34,14 +34,16 @@ udp.on('message', (msg) =>{
 udp.bind(udpPort,udpHost);
 
 app.get("/data", (req,res) =>{
-    dbdata = cnx.getgpsdata();
-    console.log(dbdata[2].fecha);
-    res.json({
-        "lat": data[0].substr(0,8),
-        "lon": data[1].substr(0,9),
-        "tm":  data[2],
-        "dt":  data[3],
-    });
+    let dbdata = cnx.getgpsdata();
+    console.log(dbdata);
+    if (data[0]==0){
+        res.json({
+            "lat": data[0].substr(0,8),
+            "lon": data[1].substr(0,9),
+            "tm":  data[2],
+            "dt":  data[3],
+        });
+    }
 
 });
 
