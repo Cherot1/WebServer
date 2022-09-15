@@ -119,7 +119,8 @@ body.active .wrapper .section{
 }
 
 body.active #map-template{
-    margin-left: 0;
     width: 100%;
+    margin-left: 0;
+    
 }
 
