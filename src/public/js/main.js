@@ -33,7 +33,7 @@ async function getData(){
     if(responseJson.lat != 0){
         map.removeLayer(marker);
         marker = new L.marker([parseFloat(responseJson.lat), parseFloat(responseJson.lon)], {icon: penguinMarker});
-        marker.bindPopup(responseJson.lat+" | "+responseJson.lon);
+        marker.bindPopup(responseJson.lat+" |"+responseJson.lon);
         map.addLayer(marker);
 
         polylinePoints = [[prelat, prelon], [lat, lon] ]
