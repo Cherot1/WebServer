@@ -38,7 +38,7 @@ async function getData(){
 
         polylinePoints = [[prelat, prelon], [lat, lon] ]
 
-        if (preLat != 0){
+        if (prelat != 0){
             polyline = L.polyline(polylinePoints).addTo(map)
         }
     }
