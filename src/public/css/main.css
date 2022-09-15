@@ -1,66 +1,3 @@
-<<<<<<< HEAD
-@import url('https://fonts.googleapis.com/css2?family=Mukta&display=swap');
-
-body {
-    font-family: 'Mukta', sans-serif;
-    margin: 0;
-}
-
-#header{
-    padding: 1px;
-    text-align: center;
-    background: #1abc9c;
-    color: white;
-    font-size: 20px;
-}
-
-
-#table1{
-    display: inline-block;
-    margin-left: 5%;
-    float: left;
-    text-align: left;
-    font-size: large;
-
-    }
-
-#table2{
-    display: inline-block;
-    margin-right: 5%;
-    text-align: left;
-    font-size: large;
-    float: right;
-    }
-
-th {
-    text-transform: uppercase;
-    color: rgb(172, 7, 7);
-    width: 40%;
-}
-
-td{
-    width: auto;
-}
-
-
-.map {
-    width: 90%;
-    border: 1px rgb(9, 46, 9) solid;
-    height: 65%; 
-    margin: 4%;
-    margin-top: auto;
-    margin-bottom: 10%;
-    position:fixed;
-    
-    
-}
-
-#map-template  {
-    height: 100%;
-    width: 100%;
-    display: inline-block;
-    background: rgb(207, 160, 160);
-=======
 @import url('https://fonts.googleapis.com/css2?family=Mukta&family=Source+Sans+Pro:wght@200;300;400;600;700&display=swap');
 *{
     list-style: none;
@@ -185,6 +122,5 @@ body.active #map-template{
     width: 100%;
     margin-left: 0;
     
->>>>>>> d7121e11c5cd28d5a1ea7e41503b16a0611cbc3f
 }
 
