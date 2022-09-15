@@ -33,9 +33,9 @@ udp.on('message', (msg) =>{
 });
 udp.bind(udpPort,udpHost);
 
-var database_data;
+var database_data = cnx.getgpsdata;;
 app.get("/data", (req,res) =>{
-    database_data = cnx.getgpsdata;
+    
     if(data[0] != 0){
         res.json({
             "lat": data[0].substr(0,8),
