@@ -35,7 +35,7 @@ udp.bind(udpPort,udpHost);
 app.get("/data", (req,res) =>{
     res.json({
         "lat": data[0].substr(0,8),
-        "lon": data[1].substr(0,8),
+        "lon": data[1].substr(0,9),
         "tm":  data[2],
         "dt":  data[3],
     });
