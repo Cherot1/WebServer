@@ -26,7 +26,7 @@ const getgpsdata = () => {
     let query = "SELECT fecha, hora, latitud, longitud FROM gps_data ORDER BY ID DESC LIMIT 1";
     pool.query(query,function (err, result) {
         if(err) throw err;
-        console.log(result);
+        console.log(result[0].fecha);
     })
 }
 
