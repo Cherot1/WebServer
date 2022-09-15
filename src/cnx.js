@@ -1,8 +1,8 @@
 const mysql = require("mysql");
-
+let conx
 
 const conexion = () =>{ 
-    mysql.createConnection({
+     conx= mysql.createConnection({
     host: process.env.RDS_HOST,
     user: process.env.RDS_USER,
     password: process.env.RDS_PASS,
@@ -11,7 +11,7 @@ const conexion = () =>{
 }
 
 const conectar = () =>{
-    conexion.connect(err => {
+    conx.connect(err => {
         if(err) throw err;
         console.log("Succefull conection!");
     });
