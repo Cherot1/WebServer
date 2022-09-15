@@ -1,5 +1,5 @@
 const mysql = require("mysql");
-const conexion = mysql.createPool({
+var pool = mysql.createPool({
     host: process.env.RDS_HOST,
     user: process.env.RDS_USER,
     password: process.env.RDS_PASS,
@@ -7,7 +7,7 @@ const conexion = mysql.createPool({
 });
 
 const conectar = () =>{
-    conexion.connect(err => {
+    pool.getConnection(err => {
         if(err) throw err;
         console.log("Succefull conection!");
     });
@@ -17,16 +17,14 @@ const addgpsdata = (date, time, latitude, longitude) => {
     //conectar();
     let query = "INSERT INTO gps_data (fecha,hora,latitud,longitud)"
         +"VALUES ('"+date+"','"+time+"','"+latitude+"','"+longitude+"')";
-    conexion.query(query, function (err) {
+    pool.query(query, function (err) {
         if(err) throw err;
     })
-    conexion.end();
 }
 
 const getgpsdata = () => {
-
     let query = "SELECT * FROM data ORDER BY ID DESC LIMIT 1";
-    conexion.query(query,function (err, result) {
+    pool.query(query,function (err, result) {
         if(err) throw err;
         console.log(result)
         return result;
