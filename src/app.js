@@ -35,7 +35,7 @@ udp.bind(udpPort,udpHost);
 
 app.get("/data", (req,res) =>{
     dbdata = cnx.getgpsdata();
-    console.log(dbdata.fecha[0].latitud);
+    console.log(dbdata[0].fecha);
     res.json({
         "lat": data[0].substr(0,8),
         "lon": data[1].substr(0,9),
