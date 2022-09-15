@@ -10,9 +10,12 @@ var penguinMarker = L.icon({
 })
 
 marker = L.marker([11.022, -74.869], {icon: penguinMarker})
-
+var polyline;
+var polylinePoints;
 let lat = 0;
 let lon = 0;
+let prelat = 0;
+let prelon = 0;
 
 
 
@@ -32,7 +35,15 @@ async function getData(){
         marker = new L.marker([parseFloat(responseJson.lat), parseFloat(responseJson.lon)], {icon: penguinMarker});
         marker.bindPopup(responseJson.lat+" | "+responseJson.lon);
         map.addLayer(marker);
+
+        polylinePoints = [[prelat, prelon], [lat, lon] ]
+
+        if (preLat != 0){
+            polyline = L.polyline(polylinePoints).addTo(map)
+        }
     }
+    prelat = lat;
+    prelon = lon;
     
 }
 
