@@ -6,7 +6,7 @@ L.tileLayer(tileURL).addTo(map);
 var penguinMarker = L.icon({
     iconUrl: 'penguinMarker.png',
     iconSize: [35,39.5],
-    iconAnchor: [35, 38]
+    iconAnchor: [0, 38]
 })
 
 marker = L.marker([11.022, -74.869], {icon: penguinMarker})
