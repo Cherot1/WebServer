@@ -26,6 +26,7 @@ const getgpsdata = () => {
     let query = "SELECT * FROM data ORDER BY ID DESC LIMIT 1";
     conexion.query(query,function (err, result) {
         if(err) throw err;
+        console.log(result)
         return result;
     })
 }

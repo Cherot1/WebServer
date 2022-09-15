@@ -28,10 +28,12 @@ let data_bk = [0, 0, 0, 0];
 udp.on('message', (msg) =>{
     data = msg.toString().split("\n");
     if (data_bk[2] !== data[2]){
-        cnx.addgpsdata(data[3],data[2],data[0],data[1]);}
+        cnx.addgpsdata(data[3],data[2],data[0].substr(0,8),data[1].substr(0,9));}
     data_bk = data;
 });
 udp.bind(udpPort,udpHost);
+
+dbdata = cnx.getgpsdata();
 app.get("/data", (req,res) =>{
     res.json({
         "lat": data[0].substr(0,8),
