@@ -24,9 +24,9 @@ const addgpsdata = (date, time, latitude, longitude) => {
 
 const getgpsdata = () => {
     let query = "SELECT * FROM gps_data ORDER BY ID DESC LIMIT 1";
-    pool.query(query,function (err, rows, fields) {
+    pool.query(query,function (err, result) {
         if(err) throw err;
-        return rows;
+        return result;
     })
 }
 
