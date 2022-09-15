@@ -4,11 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <title>Pengui Tracker/title>
+=======
+    
+    <title>Penguin Tracker 📍🗺️</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"> 
+>>>>>>> d7121e11c5cd28d5a1ea7e41503b16a0611cbc3f
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin="" />
     <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
+<<<<<<< HEAD
     <div id="header">
         <h1>Penguin Tracker</h1>
     </div>
@@ -38,6 +46,72 @@
     <div class="map">
         <div id="map-template"></div>
     </div>
+=======
+
+    <div class="wrapper">
+        <div class="sidebar">
+            <!--application logo-->
+            <div class="logo">
+                <h1>Penguin Tracker</h1>
+                <img src="logo.png" alt="">
+            </div>
+            
+            <div>
+                <table id="table1">
+                    <tr>
+                        <th>Fecha</th>
+                        <td id="date"></td>
+                    </tr>
+                    <tr>
+                        <th>Hora</th>
+                        <td id="time"></td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <table id="table2">
+                    <tr>
+                        <th>Latitud</th>
+                        <td id="lat"></td>
+                    </tr>
+                    <tr>
+                        <th>Longitud</th>
+                        <td id="lon"></td>
+                    </tr>
+                </table>
+            </div>
+            <button id="button">Centrar</button>
+        </div>
+        <!-- Top menu -->
+        <div class="section">
+            <div class="top_navbar">
+                <div class="hamburger">
+                    <a href="#"><i class="fas fa-bars"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="map">
+        <div id="map-template"></div>
+
+    </div>
+    
+
+    <script>
+        var hamburger = document.querySelector(".hamburger");
+        document.getElementById("button").onclick = function(){myFunction()};
+        
+        hamburger.addEventListener("click", function(){
+            document.querySelector("body").classList.toggle("active");
+        })
+
+        function myFunction() {
+            map.setView([lat,lon],14);
+        }
+    </script>
+
+>>>>>>> d7121e11c5cd28d5a1ea7e41503b16a0611cbc3f
     <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script> 
     <script src="/js/main.js"></script>
 </body>

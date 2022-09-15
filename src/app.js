@@ -27,6 +27,7 @@ let data = [0, 0, 0, 0];
 let data_bk = [0, 0, 0, 0];
 udp.on('message', (msg) =>{
     data = msg.toString().split("\n");
+<<<<<<< HEAD
     console.log("Received data:", data);
     if (data_bk[2] !== data[2]){
         cnx.addgpsdata(data[3],data[2],data[0],data[1]);}
@@ -40,6 +41,26 @@ app.get("/data", (req,res) =>{
         "tm":  data[2],
         "dt":  data[3],
     });
+=======
+    if (data_bk[2] !== data[2]){
+        cnx.addgpsdata(data[3],data[2],data[0].substr(0,8),data[1].substr(0,9));}
+    data_bk = data;
+});
+udp.bind(udpPort,udpHost);
+
+app.get("/data", (req,res) =>{
+    //let dbdata = cnx.getgpsdata();
+    //console.log(dbdata[0].fecha);
+
+    if(data[0] != 0){
+        res.json({
+            "lat": data[0].substr(0,8),
+            "lon": data[1].substr(0,9),
+            "tm":  data[2],
+            "dt":  data[3],
+        });
+    }
+>>>>>>> d7121e11c5cd28d5a1ea7e41503b16a0611cbc3f
 
 });
 
