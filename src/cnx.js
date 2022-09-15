@@ -7,7 +7,7 @@ const conexion = mysql.createConnection({
 });
 
 const conectar = () =>{
-    conexion(err => {
+    conexion.connect(err => {
         if(err) throw err;
         console.log("Succefull conection!");
     });
@@ -20,9 +20,11 @@ const addgpsdata = (date, time, latitude, longitude) => {
     conexion.query(query, function (err) {
         if(err) throw err;
     })
+    conexion.end();
 }
 
 const getgpsdata = () => {
+    conectar();
     let query = "SELECT * FROM data ORDER BY ID DESC LIMIT 1";
     conexion.query(query,function (err, result) {
         if(err) throw err;
