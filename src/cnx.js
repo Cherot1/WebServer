@@ -27,6 +27,7 @@ const getgpsdata = () => {
     pool.query(query,function (err, result) {
         if(err) throw err;
         console.log(result[0].fecha);
+        return result;
     })
 }
 
