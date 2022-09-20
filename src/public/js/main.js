@@ -1,6 +1,6 @@
 // build leaflet map with an spific template
 
-const map = L.map('map-template', {zoomControl: false}).setView([10.965633, -74.8215339], 12.5);const tileURL = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+const map = L.map('map-template', {zoomControl: false}).setView([10.965633, -74.8215339], 12.5);const tileURL = 'https://tile.openstreetmap.de/{z}/{x}/{y}.png';
 L.tileLayer(tileURL).addTo(map);
 
 var penguinMarker = L.icon({

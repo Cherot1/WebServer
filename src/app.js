@@ -27,6 +27,7 @@ let data = [0, 0, 0, 0];
 let data_bk = [0, 0, 0, 0];
 udp.on('message', (msg) =>{
     data = msg.toString().split("\n");
+    console.log(data)
     if (data_bk[2] !== data[2]){
         cnx.addgpsdata(data[3],data[2],data[0].substr(0,8),data[1].substr(0,9));}
     data_bk = data;
