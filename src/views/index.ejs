@@ -48,16 +48,43 @@
                     </a>
                 </div>
                 <div></div>
-                <button id="button" style="border-radius: 20px">
+                <button id="button" onclick="centerMap()" style="border-radius: 20px">
                     <i class='bx bx-target-lock'></i>
                 </button>
             </li>
             <li>
                 <div class="iocn-link-rt">
-                    <a href="#">
+                    <a href="#" id="recorridos">
                         <i class='bx bx-stats' ></i>
                         <span class="links_name">Recorridos</span>
                     </a>
+                </div>
+                <div class="historic active">
+                    <div class="moment">
+                        <p style="margin-top: 10px">Escoja fecha y hora de incio</p>
+                        <input
+                                id="start_date"
+                                type="date"
+                                onkeydown="return false">
+
+                        <input
+                                id="start_time"
+                                type="time"
+                                onkeydown="return false"
+                                style="margin-top: 5px">
+                    </div>
+                    <div class="moment">
+                        <p style="margin-top: 30px">Escoja fecha y hora de fin</p>
+                        <input
+                                id="end_date"
+                                type="date"
+                                onkeydown="return false">
+                        <input
+                                id="end_time"
+                                type="time"
+                                onkeydown="return false"
+                                style="margin-top: 5px">
+                    </div>
                 </div>
             </li>
         </ul>
@@ -69,16 +96,17 @@
     <script>
         let btn = document.querySelector("#btn");
         let sidebar = document.querySelector(".sidebar");
+        let rec = document.querySelector("#recorridos");
+        let historic = document.querySelector(".historic");
 
+        rec.onclick = function () {
+            historic.classList.toggle("active");
+        }
         btn.onclick = function() {
             sidebar.classList.toggle("active");
         }
 
 
-        document.getElementById("button").onclick = function(){myFunction()};
-        function myFunction() {
-            map.setView([lat,lon],14);
-        }
     </script>
 
     <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script> 

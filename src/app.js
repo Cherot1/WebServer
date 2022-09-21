@@ -4,7 +4,9 @@ const express = require('express');
 const engine = require('ejs-mate');
 const path = require('path');
 const dgram = require('dgram');
+
 const cnx = require('./cnx');
+const moment = require("moment");
 
 const app = express();
 
@@ -18,8 +20,9 @@ app.set('views', path.join(__dirname, 'views' ));
 const udp = dgram.createSocket('udp4');
 const udpHost = "";
 const udpPort = parseInt(process.env.UDP_PORT);
-// initialization
 
+
+// initialization
 udp.on('listening', () => {
     console.log("UDP Server on: ", udpPort);
 });
@@ -27,7 +30,6 @@ let data = [0, 0, 0, 0];
 let data_bk = [0, 0, 0, 0];
 udp.on('message', (msg) =>{
     data = msg.toString().split("\n");
-    console.log(data)
     if (data_bk[2] !== data[2]){
         cnx.addgpsdata(data[3],data[2],data[0].substr(0,8),data[1].substr(0,9));}
     data_bk = data;
@@ -35,17 +37,15 @@ udp.on('message', (msg) =>{
 udp.bind(udpPort,udpHost);
 
 app.get("/data", (req,res) =>{
-    //let dbdata = cnx.getgpsdata();
-    //console.log(dbdata[0].fecha);
+    cnx.pool.query("SELECT fecha, hora, latitud, longitud FROM gps_data ORDER BY ID DESC LIMIT 1", (err,rows) => {
+            res.json({
+                "lat": rows[0].latitud,
+                "lon": rows[0].longitud,
+                "tm":  rows[0].hora,
+                "dt":  moment(rows[0].fecha).format("DD/MM/YYYY"),
 
-    if(data[0] != 0){
-        res.json({
-            "lat": data[0].substr(0,8),
-            "lon": data[1].substr(0,9),
-            "tm":  data[2],
-            "dt":  data[3],
-        });
-    }
+            });
+    });
 
 });
 
