@@ -198,6 +198,7 @@ body {
     position: relative;
     font-size: 14px;
     border-radius: 5px;
+    background: #a5b5ff;
     width: 120px;
     height: 30px;
     transition: all 0.4s ease;
