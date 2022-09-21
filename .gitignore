@@ -2,6 +2,11 @@
 .env
 =======
 .env
+<<<<<<< HEAD
 /node modules
 /.idea
 >>>>>>> d7121e11c5cd28d5a1ea7e41503b16a0611cbc3f
+=======
+node modules/
+/.idea
+>>>>>>> cherot
