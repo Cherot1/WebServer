@@ -38,8 +38,6 @@ udp.bind(udpPort,udpHost);
 
 var database_data = cnx.getgpsdata;;
 app.get("/data", (req,res) =>{
-<<<<<<< HEAD
-    
     if(data[0] != 0){
         res.json({
             "lat": data[0].substr(0,8),
@@ -48,7 +46,6 @@ app.get("/data", (req,res) =>{
             "dt":  data[3],
         });
     }
-=======
     cnx.pool.query("SELECT fecha, hora, latitud, longitud FROM gps_data ORDER BY ID DESC LIMIT 1", (err,rows) => {
             res.json({
                 "lat": rows[0].latitud,
@@ -58,8 +55,6 @@ app.get("/data", (req,res) =>{
 
             });
     });
->>>>>>> cherot
-
 });
 
 
