@@ -9,7 +9,7 @@ var pool = mysql.createPool({
 const conectar = () =>{
     pool.getConnection(err => {
         if(err) throw err;
-        console.log("Succefull conection!");
+        console.log("Succefull database conection!");
     });
 }
 const addgpsdata = (date, time, latitude, longitude) => {
@@ -25,11 +25,6 @@ const getgpsdata = () => {
     let query = "SELECT fecha, hora, latitud, longitud FROM gps_data ORDER BY ID DESC LIMIT 1";
     pool.query(query,function (err, result) {
         if(err) throw err;
-<<<<<<< HEAD
-        console.log(result);
-        return result;
-=======
->>>>>>> cherot
     })
 }
 module.exports = {
