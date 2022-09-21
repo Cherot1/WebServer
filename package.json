@@ -27,10 +27,7 @@
     "mysql": "^2.18.1",
     "mysql-await": "^2.2.2",
     "mysql2": "^2.3.3",
-<<<<<<< HEAD
     "neovim": "^4.10.1",
-=======
->>>>>>> cherot
     "nodemon": "^2.0.20",
     "socket.io": "^4.5.1"
   }
