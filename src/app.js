@@ -51,14 +51,23 @@ app.get("/data", (req,res) =>{
 
 app.use(express.json({limit: '1mb'}));
 app.post("/moment", (req,res) =>{
-    console.log(req.body.sdate);
-    let btwDateQuery = "SELECT latitud, longitud FROM gps_data WHERE fecha BETWEEN "
-        + req.body.sdate.replace(/-/g,"") + " AND "
-        + req.body.edate.replace(/-/g,"");
-    console.log(btwDateQuery)
 
 
-})
+    let btwDateQuery = "SELECT latitud, longitud FROM gps_data WHERE ( fecha = "+req.body.sdate+" AND hora > "+req.body.stime+":00 ) OR ( fecha > " +req.body.sdate+" AND fecha < "+req.body.edate+" ) OR ( fecha = "+req.body.edate+" AND hora < "+req.body.etime+":00 )";
+    console.log(btwDateQuery);
+
+    cnx.pool.query(btwDateQuery, (err,rows) => {
+        if (err) throw err;
+        console.log(rows.latitud)
+        /*res.json({
+            "lat": rows[0].latitud,
+            "lon": rows[0].longitud,
+            "tm":  rows[0].hora,
+            "dt":  moment(rows[0].fecha).format("DD/MM/YYYY"),
+        });*/
+    });
+
+});
 
 /*
 */
