@@ -120,6 +120,5 @@ button.addEventListener("click", async (event) =>{
             }
         } 
     }
-    console.log(arr1.reduce((a,b) => a + b, 0)/arr.length);
     
  })
