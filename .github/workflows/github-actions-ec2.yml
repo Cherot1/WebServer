@@ -39,10 +39,10 @@ jobs:
           REMOTE_USER: ${{ secrets.USERN }}
           TARGET: ${{ secrets.DIREC }}
 
-#      - name: Deploy to Server 4
-#        uses: easingthemes/ssh-deploy@main
-#        env:
- #         SSH_PRIVATE_KEY: ${{ secrets.SSH_ALEJO }}
-  #        REMOTE_HOST: ${{ secrets.DNS_ALEJO }}
-   #       REMOTE_USER: ${{ secrets.USERN }}
-    #      TARGET: ${{ secrets.DIREC }}
+      - name: Deploy to Server 4
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_ALEJO }}
+          REMOTE_HOST: ${{ secrets.DNS_ALEJO }}
+          REMOTE_USER: ${{ secrets.USERN }}
+          TARGET: ${{ secrets.DIREC }}
