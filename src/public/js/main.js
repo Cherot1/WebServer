@@ -10,6 +10,7 @@ var nowTime =  date.getHours() + ':' + date.getMinutes();
 
 end_date.value = todaysDate;
 end_time.value = nowTime;
+
 start_date.max = todaysDate;
 start_time.max = nowTime;
 end_date.max = todaysDate;
@@ -23,10 +24,27 @@ end_date.addEventListener('click', function (){
     end_date.min = start_date.value;
 })
 
-function historicPolyline(){
-    let btwDateQuery = "SELECT latitud, longitud FROM gps_data WHERE fecha BETWEEN " + start_date.value.replace(/-/g,"") + " AND "+ end_date.value.replace(/-/g,"");
-    console.log(btwDateQuery)
-}
+
+button = document.getElementById('historics');
+button.addEventListener("click", async (event) =>{
+    const data = {
+        sdate: start_date.value,
+        stime: start_time.value,
+        edate: end_date.value,
+        etime: end_time.value};
+
+    const res  = await fetch("/moment", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+    });
+    const historicData = await res.json();
+ })
+
+
+
 
 
 

@@ -49,6 +49,20 @@ app.get("/data", (req,res) =>{
     });
 });
 
+app.use(express.json({limit: '1mb'}));
+app.post("/moment", (req,res) =>{
+    console.log(req.body.sdate);
+    let btwDateQuery = "SELECT latitud, longitud FROM gps_data WHERE fecha BETWEEN "
+        + req.body.sdate.replace(/-/g,"") + " AND "
+        + req.body.edate.replace(/-/g,"");
+    console.log(btwDateQuery)
+
+
+})
+
+/*
+*/
+
 
 
 //routes
