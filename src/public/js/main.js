@@ -119,6 +119,5 @@ button.addEventListener("click", async (event) =>{
                 L.polyline(polylineHistPoints, { color: 'black', with: 2.0 }).addTo(map);
             }
         } 
-    }
-    
+    }    
  })
