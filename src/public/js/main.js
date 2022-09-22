@@ -6,7 +6,16 @@ end_time = document.getElementById('end_time');
 end_date = document.getElementById('end_date');
 
 var todaysDate = date.toISOString().slice(0,10);
-var nowTime =  date.getHours() + ':' + date.getMinutes();
+
+hours = date.getHours();
+if(parseInt(date.getHours()) < 10){
+    hours = '0'+date.getHours();
+}
+minutes = date.getMinutes();
+if(parseInt(date.getMinutes()<9)){
+    minutes = '0'+date.getMinutes();
+}
+nowTime = hours+':'+minutes;
 
 end_date.value = todaysDate;
 end_time.value = nowTime;
@@ -23,30 +32,6 @@ start_date.addEventListener('click', function (){
 end_date.addEventListener('click', function (){
     end_date.min = start_date.value;
 })
-
-
-button = document.getElementById('historics');
-button.addEventListener("click", async (event) =>{
-    const data = {
-        sdate: start_date.value,
-        stime: start_time.value,
-        edate: end_date.value,
-        etime: end_time.value};
-
-    const res  = await fetch("/moment", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-    });
-    const historicData = await res.json();
- })
-
-
-
-
-
 
 
 // build leaflet map with a specific template
@@ -101,3 +86,32 @@ let interval = setInterval(()=>{getData()}, 3000);
 function centerMap() {
     map.setView([lat,lon],14);
 }
+
+
+button = document.getElementById('historics');
+button.addEventListener("click", async (event) =>{
+    const data = {
+        sdate: start_date.value,
+        stime: start_time.value,
+        edate: end_date.value,
+        etime: end_time.value};
+
+    const res  = await fetch("/moment", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+    });
+    const historicData = await res.json();
+    gpsHistoricData = historicData.data
+    
+       
+    for (var i = 1; i < gpsHistoricData.length; i++){
+        origin = [parseFloat(gpsHistoricData[i-1].latitud),parseFloat(gpsHistoricData[i-1].longitud)];
+        destin = [parseFloat(gpsHistoricData[i].latitud),parseFloat(gpsHistoricData[i].longitud)];
+        var polylineHistPoints = [origin,destin];
+        L.polyline(polylineHistPoints, { color: 'black', with: 2.0 }).addTo(map); 
+    }
+    
+ })
