@@ -31,6 +31,7 @@ let data = [0, 0, 0, 0];
 let data_bk = [0, 0, 0, 0];
 udp.on('message', (msg) =>{
     data = msg.toString().split("\n");
+    console.log(data)
     if (data_bk[2] !== data[2]){
         cnx.addGpsData(data[3],data[2],data[0],data[1]);}
     data_bk = data;
@@ -52,7 +53,6 @@ app.get("/data", (req,res) =>{
 app.use(express.json({limit: '1mb'}));
 app.post("/moment", (req,res) =>{
 
-
     let btwDateQuery = "SELECT latitud, longitud FROM gps_data WHERE ( fecha = '"+req.body.sdate+"' AND hora > '"+req.body.stime+":00' ) OR ( fecha > '" +req.body.sdate+"' AND fecha < '"+req.body.edate+"' ) OR ( fecha = '"+req.body.edate+"' AND hora < '"+req.body.etime+":00' )";
 
     cnx.pool.query(btwDateQuery, (err,rows) => {
@@ -61,7 +61,6 @@ app.post("/moment", (req,res) =>{
             "data" : rows
         })
     });
-
 });
 
 /*
