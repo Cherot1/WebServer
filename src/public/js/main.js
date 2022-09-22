@@ -8,11 +8,11 @@ end_date = document.getElementById('end_date');
 var todaysDate = date.toISOString().slice(0,10);
 
 hours = date.getHours();
-if(parseInt(date.getHours()) < 10){
+if(parseInt(hours) < 10){
     hours = '0'+date.getHours();
 }
 minutes = date.getMinutes();
-if(parseInt(date.getMinutes()<9)){
+if(parseInt(minutes)<9){
     minutes = '0'+date.getMinutes();
 }
 nowTime = hours+':'+minutes;
@@ -106,12 +106,16 @@ button.addEventListener("click", async (event) =>{
     const historicData = await res.json();
     gpsHistoricData = historicData.data
     
-       
+    var arr = [];
     for (var i = 1; i < gpsHistoricData.length; i++){
         origin = [parseFloat(gpsHistoricData[i-1].latitud),parseFloat(gpsHistoricData[i-1].longitud)];
         destin = [parseFloat(gpsHistoricData[i].latitud),parseFloat(gpsHistoricData[i].longitud)];
         var polylineHistPoints = [origin,destin];
-        L.polyline(polylineHistPoints, { color: 'black', with: 2.0 }).addTo(map); 
+        arr.push(parseFloat(gpsHistoricData[i-1].latitud) - parseFloat(gpsHistoricData[i].latitud))
+        if(arr[arr.length - 1] <= 0.0001092251175692897){
+            L.polyline(polylineHistPoints, { color: 'black', with: 2.0 }).addTo(map);
+        } 
     }
+    console.log(arr.reduce((a,b) => a + b, 0)/arr.length);
     
  })
