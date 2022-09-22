@@ -114,7 +114,7 @@ button.addEventListener("click", async (event) =>{
         var polylineHistPoints = [origin,destin];
         arr1.push(parseFloat(gpsHistoricData[i-1].latitud) - parseFloat(gpsHistoricData[i].latitud))
         arr2.push(parseFloat(gpsHistoricData[i-1].longitud) - parseFloat(gpsHistoricData[i].longitud))
-        if(arr1[arr1.length - 1] <= 0.000803337){
+        if(arr1[arr1.length - 1] <= 0.00080333){
             if(arr1[arr2.length - 1] <= 0.000207845){
                 L.polyline(polylineHistPoints, { color: 'black', with: 2.0 }).addTo(map);
             }
