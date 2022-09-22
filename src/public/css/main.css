@@ -107,7 +107,7 @@ body {
     border: none;
     cursor: pointer;
     width: 50px;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-left: 6px;
     transition: all 0.4s ease;
 }
@@ -176,12 +176,12 @@ body {
 .sidebar .historic{
     opacity: 0;
     transition: all .5s ease;
+    position: absolute;
 }
 
 
 .sidebar .historic .moment{
     position: relative;
-    margin-bottom: 10px;
     transition: all 0.5s ease;
 }
 
@@ -194,11 +194,11 @@ body {
 }
 
 .sidebar.active .historic .moment input{
-    margin: 0 20px;
+    margin-left: 15%;
     position: relative;
-    font-size: 14px;
+    font-size: 15px;
     border-radius: 5px;
-    background: #a5b5ff;
+    background: #c9d1ff;
     width: 120px;
     height: 30px;
     transition: all 0.4s ease;
@@ -210,11 +210,17 @@ body {
     transition: all 0.5s ease;
 }
 
+.sidebar .historic .boton button{
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+
+
 .sidebar .historic.active{
     height: 0;
     padding: 0;
     overflow: hidden;
-    transition: all 0.5s ease;
+    transition: all 0.3s ease;
 }
 
 #map-template  {

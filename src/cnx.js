@@ -1,34 +1,28 @@
-var mysql = require("mysql");
-var pool = mysql.createPool({
+const mysql = require("mysql");
+const pool = mysql.createPool({
     host: process.env.RDS_HOST,
     user: process.env.RDS_USER,
     password: process.env.RDS_PASS,
     database: process.env.RDS_DB,
 });
 
-const conectar = () =>{
+const connect = () =>{
     pool.getConnection(err => {
         if(err) throw err;
-        console.log("Succefull database conection!");
+        console.log("Successful database connection!");
     });
 }
-const addgpsdata = (date, time, latitude, longitude) => {
-    //conectar();
+
+const addGpsData = (date, time, latitude, longitude) => {
     let query = "INSERT INTO gps_data (fecha,hora,latitud,longitud)"
         +"VALUES ('"+date+"','"+time+"','"+latitude+"','"+longitude+"')";
     pool.query(query, function (err) {
         if(err) throw err;
     })
 }
-let data = 0;
-const getgpsdata = () => {
-    let query = "SELECT fecha, hora, latitud, longitud FROM gps_data ORDER BY ID DESC LIMIT 1";
-    pool.query(query,function (err, result) {
-        if(err) throw err;
-    })
-}
+
 module.exports = {
     pool,
-    conectar,
-    getgpsdata
+    connect,
+    addGpsData
 }

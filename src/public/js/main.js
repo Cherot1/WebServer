@@ -15,6 +15,20 @@ start_time.max = nowTime;
 end_date.max = todaysDate;
 end_time.max = nowTime;
 
+start_date.addEventListener('click', function (){
+    start_date.max = end_date.value;
+});
+
+end_date.addEventListener('click', function (){
+    end_date.min = start_date.value;
+})
+
+function historicPolyline(){
+    let btwDateQuery = "SELECT latitud, longitud FROM gps_data WHERE fecha BETWEEN " + start_date.value.replace(/-/g,"") + " AND "+ end_date.value.replace(/-/g,"");
+    console.log(btwDateQuery)
+}
+
+
 
 
 // build leaflet map with a specific template
@@ -41,7 +55,7 @@ let prelon = 0;
 async function getData(){
     const response = await fetch("./data", {});
     let responseJson = await response.json();
-    console.log("respuesta del servidor", responseJson)
+    //console.log("respuesta del servidor", responseJson)
     document.getElementById("date").innerHTML = await `${responseJson.dt}`;
     document.getElementById("time").innerHTML = await `${responseJson.tm}`;
 
@@ -62,8 +76,8 @@ async function getData(){
     }
     prelat = lat;
     prelon = lon;
-    
 }
+
 let interval = setInterval(()=>{getData()}, 3000);
 
 function centerMap() {

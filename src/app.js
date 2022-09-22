@@ -26,36 +26,29 @@ const udpPort = parseInt(process.env.UDP_PORT);
 udp.on('listening', () => {
 console.log("UDP Server:  ", udpPort);
 });
+
 let data = [0, 0, 0, 0];
 let data_bk = [0, 0, 0, 0];
 udp.on('message', (msg) =>{
     data = msg.toString().split("\n");
     if (data_bk[2] !== data[2]){
-        cnx.addgpsdata(data[3],data[2],data[0].substr(0,8),data[1].substr(0,9));}
+        cnx.addGpsData(data[3],data[2],data[0],data[1]);}
     data_bk = data;
 });
 udp.bind(udpPort,udpHost);
 
-var database_data = cnx.getgpsdata;;
+
 app.get("/data", (req,res) =>{
-    if(data[0] != 0){
-        res.json({
-            "lat": data[0].substr(0,8),
-            "lon": data[1].substr(0,9),
-            "tm":  data[2],
-            "dt":  data[3],
-        });
-    }
     cnx.pool.query("SELECT fecha, hora, latitud, longitud FROM gps_data ORDER BY ID DESC LIMIT 1", (err,rows) => {
             res.json({
                 "lat": rows[0].latitud,
                 "lon": rows[0].longitud,
                 "tm":  rows[0].hora,
                 "dt":  moment(rows[0].fecha).format("DD/MM/YYYY"),
-
             });
     });
 });
+
 
 
 //routes
@@ -69,4 +62,4 @@ app.listen(port, () => {
     console.log("server on port: ",port)
 });
 
-cnx.conectar();
+cnx.connect();

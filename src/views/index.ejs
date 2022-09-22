@@ -62,12 +62,11 @@
                 </div>
                 <div class="historic active">
                     <div class="moment">
-                        <p style="margin-top: 10px">Escoja fecha y hora de incio</p>
+                        <p style="margin-top: 5px">Escoja fecha y hora de incio</p>
                         <input
                                 id="start_date"
                                 type="date"
                                 onkeydown="return false">
-
                         <input
                                 id="start_time"
                                 type="time"
@@ -75,7 +74,7 @@
                                 style="margin-top: 5px">
                     </div>
                     <div class="moment">
-                        <p style="margin-top: 30px">Escoja fecha y hora de fin</p>
+                        <p style="margin-top: 10px">Escoja fecha y hora de fin</p>
                         <input
                                 id="end_date"
                                 type="date"
@@ -85,6 +84,11 @@
                                 type="time"
                                 onkeydown="return false"
                                 style="margin-top: 5px">
+                    </div>
+                    <div class="boton">
+                        <button id="historics" onclick="historicPolyline()">
+                            <i class='bx bx-search-alt-2' ></i>
+                        </button>
                     </div>
                 </div>
             </li>
