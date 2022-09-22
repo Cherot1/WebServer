@@ -106,16 +106,20 @@ button.addEventListener("click", async (event) =>{
     const historicData = await res.json();
     gpsHistoricData = historicData.data
     
-    var arr = [];
+    var arr1 = [];
+    var arr2 = [];
     for (var i = 1; i < gpsHistoricData.length; i++){
         origin = [parseFloat(gpsHistoricData[i-1].latitud),parseFloat(gpsHistoricData[i-1].longitud)];
         destin = [parseFloat(gpsHistoricData[i].latitud),parseFloat(gpsHistoricData[i].longitud)];
         var polylineHistPoints = [origin,destin];
-        arr.push(parseFloat(gpsHistoricData[i-1].latitud) - parseFloat(gpsHistoricData[i].latitud))
-        if(arr[arr.length - 1] <= 0.0001092251175692897){
-            L.polyline(polylineHistPoints, { color: 'black', with: 2.0 }).addTo(map);
+        arr1.push(parseFloat(gpsHistoricData[i-1].latitud) - parseFloat(gpsHistoricData[i].latitud))
+        arr2.push(parseFloat(gpsHistoricData[i-1].longitud) - parseFloat(gpsHistoricData[i].longitud))
+        if(arr1[arr1.length - 1] <= 0.000803337){
+            if(arr1[arr2.length - 1] <= 0.000207845){
+                L.polyline(polylineHistPoints, { color: 'black', with: 2.0 }).addTo(map);
+            }
         } 
     }
-    console.log(arr.reduce((a,b) => a + b, 0)/arr.length);
+    console.log(arr1.reduce((a,b) => a + b, 0)/arr.length);
     
  })
