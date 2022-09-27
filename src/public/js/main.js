@@ -94,7 +94,7 @@ function centerMap() {
 var cont=0;
 function onMapClick(e) {
     if (cont==0){
-         marker1 = new L.marker(e.latlng, {draggable:'true'}, {icon: pinguino});
+         marker1 = new L.marker(e.latlng, {draggable:'true', icon: pinguino});
     }
     marker1.on('dragend', function(event){
       var marker1 = event.target;
