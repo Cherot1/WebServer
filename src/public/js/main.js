@@ -83,3 +83,16 @@ let interval = setInterval(()=>{getData()}, 3000);
 function centerMap() {
     map.setView([lat,lon],14);
 }
+
+function onMapClick(e) {
+    marker = new L.marker(e.latlng, {draggable:'true'});
+    marker.on('dragend', function(event){
+      var marker = event.target;
+      var position = marker.getLatLng();
+      marker.setLatLng(new L.LatLng(position.lat, position.lng),{draggable:'true'});
+      map.panTo(new L.LatLng(position.lat, position.lng))
+    });
+    map.addLayer(marker);
+  };
+  
+  map.on('click', onMapClick);
