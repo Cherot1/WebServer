@@ -4,7 +4,7 @@ name: Push-to-EC2
 on:
   push:
     branches:
-      - main
+      - Estrada
 
 jobs:
   deploy:
@@ -15,14 +15,6 @@ jobs:
       - name: Checkout the files
         uses: actions/checkout@v2
 
-      - name: Deploy to Server 1
-        uses: easingthemes/ssh-deploy@main
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_HECTOR }}
-          REMOTE_HOST: ${{ secrets.DNS_HECTOR }}
-          REMOTE_USER: ${{ secrets.USERN }}
-          TARGET: ${{ secrets.DIREC }}
-
       - name: Deploy to Server 2
         uses: easingthemes/ssh-deploy@main
         env:
@@ -30,19 +22,4 @@ jobs:
           REMOTE_HOST: ${{ secrets.DNS_JOSE }}
           REMOTE_USER: ${{ secrets.USERN }}
           TARGET: ${{ secrets.DIREC }}
-      
-      - name: Deploy to Server 3
-        uses: easingthemes/ssh-deploy@main
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_ISA }}
-          REMOTE_HOST: ${{ secrets.DNS_ISA }}
-          REMOTE_USER: ${{ secrets.USERN }}
-          TARGET: ${{ secrets.DIREC }}
-
-      - name: Deploy to Server 4
-        uses: easingthemes/ssh-deploy@main
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_ALEJO }}
-          REMOTE_HOST: ${{ secrets.DNS_ALEJO }}
-          REMOTE_USER: ${{ secrets.USERN }}
-          TARGET: ${{ secrets.DIREC }}
+   
