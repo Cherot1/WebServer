@@ -85,15 +85,15 @@ function centerMap() {
 }
 
 function onMapClick(e) {
-    marker = new L.marker(e.latlng, {draggable:'true'});
-    marker.on('dragend', function(event){
-      var marker = event.target;
-      var position = marker.getLatLng();
+    marker1 = new L.marker(e.latlng, {draggable:'true'});
+    marker1.on('dragend', function(event){
+      var marker1 = event.target;
+      var position = marker1.getLatLng();
       marker.setLatLng(new L.LatLng(position.lat, position.lng),{draggable:'true'});
       map.panTo(new L.LatLng(position.lat, position.lng))
     });
     
   };
-  map.addLayer(marker);
+  map.addLayer(marker1);
   map.on('click', onMapClick);
   
