@@ -95,4 +95,4 @@ function onMapClick(e) {
     map.addLayer(marker);
   };
   
-  map.on('click', onMapClick);
+  
