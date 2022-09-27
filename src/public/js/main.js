@@ -43,6 +43,14 @@ var penguinMarker = L.icon({
     shadowAnchor: [4, 62],
     popupAnchor:  [10, -20]
 })
+var pinguino = L.icon({
+    iconUrl: 'pinguino.png',
+    iconSize: [35,39.5],
+    shadowSize:   [50, 64],
+    iconAnchor:   [10,20],
+    shadowAnchor: [4, 62],
+    popupAnchor:  [10, -20]
+})
 
 marker = L.marker([11.022, -74.869], {icon: penguinMarker})
 var polyline;
@@ -86,7 +94,7 @@ function centerMap() {
 var cont=0;
 function onMapClick(e) {
     if (cont==0){
-         marker1 = new L.marker(e.latlng, {draggable:'true'});
+         marker1 = new L.marker(e.latlng, {draggable:'true'}, {icon: pinguino});
     }
     marker1.on('dragend', function(event){
       var marker1 = event.target;
