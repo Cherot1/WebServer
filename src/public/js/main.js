@@ -85,7 +85,7 @@ function centerMap() {
 }
 var cont=0;
 function onMapClick(e) {
-    if (cont>1){
+    if (cont==0){
          marker1 = new L.marker(e.latlng, {draggable:'true'});
     }
     marker1.on('dragend', function(event){
