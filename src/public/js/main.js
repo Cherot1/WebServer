@@ -1,5 +1,3 @@
-const e = require("express");
-
 var date = new Date();
 var lati;
 var long;
@@ -59,6 +57,7 @@ var pinguino = L.icon({
 })
 
 marker = L.marker([11.022, -74.869], {icon: penguinMarker})
+marker1 = L.marker([11.04, -74.864], {icon: pinguino})
 var polyline;
 var polylinePoints;
 let lat = 0;
@@ -133,25 +132,28 @@ button.addEventListener("click", async (event) =>{
     }    
  })
 
+var cont=0;
 
 
   
+
+
 async function marcador(){
 
-    marker1 = new L.marker([11.04, -74.769], {icon: pinguino});
-
-    map.on("mousemove", function(e) {
-        let position=e.latlng; 
+    map.on('mousemove',function(e) {
+        let position=e.latlng;
         lati=position.lat
-        long=position.lng
-        
+        long=position.length
         marker1.setLatLng([lati,long])
-    })
+    });
 
-  const data = {
+
+
+    
+    const data = {
 
         latp: lati,
-        longp: long
+        longp: long,
         };
 
     const res  = await fetch("/place", {
@@ -163,9 +165,9 @@ async function marcador(){
     });
     
     const historicPlace = await res.json();
-    placeHistoricData = historicPlace.datap;
-    
+    placeHistoricData = historicPlace.datap
+    console.log(placeHistoricData);
 }
 
-let inte = setInterval(()=>{marcador()}, 5000)
+marcador()
 
