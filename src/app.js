@@ -26,7 +26,7 @@ const udpPort = parseInt(process.env.UDP_PORT);
 udp.on('listening', () => {
 console.log("UDP Server:  ", udpPort);
 });
-
+let datap = [0, 0];
 let data = [0, 0, 0, 0];
 let data_bk = [0, 0, 0, 0];
 udp.on('message', (msg) =>{
