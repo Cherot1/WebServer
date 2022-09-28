@@ -81,12 +81,13 @@ app.listen(port, () => {
 
 app.post("/place", (req,res) =>{
 
-    let querym= "SELECT fecha, hora FROM gps_data WHERE latitud BETWEEN ( ' "+req.body.latp+"*0.99997 ') AND  (' "+req.body.latp+"*1.00005 ') AND longitud BETWEEN ( '"+req.body.lonp+"*1.00005 ') AND  (' "+req.body.lonp+"*0.99997 ')";
+    let querym= "SELECT fecha, hora FROM gps_data WHERE latitud BETWEEN ("+req.body.latp+"*0.99997) AND  ("+req.body.latp+"*1.00005) AND longitud BETWEEN ("+req.body.lonp+"*1.00005) AND  ("+req.body.lonp+"*0.99997)";
     cnx.pool.query(querym, (err,rows) => {
         if (err) throw err;
         res.json({
             //"tm":  rows[0].hora,
-            "dt":  moment(rows[0].fecha).format("DD/MM/YYYY"),
+            //"dt":  moment(rows[0].fecha).format("DD/MM/YYYY"),
+            "data": rows
             
         })
         console.log(rows);
