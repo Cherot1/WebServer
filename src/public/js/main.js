@@ -113,7 +113,7 @@ button.addEventListener("click", async (event) =>{
         body: JSON.stringify(data),
     });
     const historicData = await res.json();
-    gpsHistoricData = historicData.datap
+    gpsHistoricData = historicData.data
     
     var arr1 = [];
     var arr2 = [];
@@ -169,7 +169,7 @@ async function marcador(){
     });
     
     const historicPlace = await res.json();
-    placeHistoricData = historicPlace.data
+    placeHistoricData = historicPlace.datap
     console.log(placeHistoricData);
 }
 
