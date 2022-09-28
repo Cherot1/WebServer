@@ -64,10 +64,12 @@ app.post("/moment", (req,res) =>{
 
 app.post("/place", (req,res) =>{
 
-    const lat= req.body.latp
-    const long= req.body.latp
+    const latmin=req.body.latp*0.99997;
+    const latmax=req.body.latp*1.00005;
+    const longmax=req.body.latp*0.99997;
+    const longmin=req.body.latp*1.00005;
 
-    let querym= "SELECT fecha, hora FROM gps_data WHERE latitud BETWEEN ("+lat+"*0.99997)  AND  ("+lat+"*1.00005) AND longitud BETWEEN ( "+long+"*1.00005) AND ("+long+"*0.99995)";
+    let querym= "SELECT fecha, hora FROM gps_data WHERE  (latitud > "+latmin+"  AND  latitud < "+latmax+") AND (longitud > "+longmin+" AND longitud < "+longmax+")";
     
     cnx.pool.query(querym, (err,rows) => {
         if (err) throw err;
