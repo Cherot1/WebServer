@@ -1,5 +1,6 @@
 var date = new Date();
-
+var lati;
+var long;
 start_time = document.getElementById('start_time');
 start_date = document.getElementById('start_date');
 end_time = document.getElementById('end_time');
@@ -40,6 +41,14 @@ L.tileLayer(tileURL).addTo(map);
 
 var penguinMarker = L.icon({
     iconUrl: 'penguinMarker.png',
+    iconSize: [35,39.5],
+    shadowSize:   [50, 64],
+    iconAnchor:   [10,20],
+    shadowAnchor: [4, 62],
+    popupAnchor:  [10, -20]
+})
+var pinguino = L.icon({
+    iconUrl: 'pinguino.png',
     iconSize: [35,39.5],
     shadowSize:   [50, 64],
     iconAnchor:   [10,20],
@@ -121,3 +130,48 @@ button.addEventListener("click", async (event) =>{
         } 
     }    
  })
+
+var cont=0;
+function onMapClick(e) {
+    if (cont==0){
+         marker1 = new L.marker(e.latlng, {draggable:'true', icon: pinguino});
+    }
+    marker1.on('dragend', function(event){
+      var marker1 = event.target;
+      var position = marker1.getLatLng();
+      marker1.setLatLng(new L.LatLng(position.lat, position.lng),{draggable:'true'});
+      map.panTo(new L.LatLng(position.lat, position.lng));
+      marker1.bindPopup("Fecha:"+placeHistoricData.fecha+",Hora:"+placeHistoricData.hora);
+      lati=position.lat;
+      long=position.lng;
+    });
+
+    map.addLayer(marker1);
+    cont=cont+1;
+}
+
+  
+map.on('click', onMapClick);
+
+async function marcador(){
+    const data = {
+
+        latp: lati,
+        longp: long,
+        };
+
+    const res  = await fetch("/place", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+    });
+    
+    const historicPlace = await res.json();
+    placeHistoricData = historicPlace.datap
+    console.log(placeHistoricData);
+}
+
+let inte = setInterval(()=>{marcador()}, 5000)
+

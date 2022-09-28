@@ -7,9 +7,8 @@ const dgram = require('dgram');
 
 const cnx = require('./cnx');
 const moment = require("moment");
-
+var datap;
 const app = express();
-
 // setting the server
 app.engine('ejs', engine);
 app.set('view engine', 'ejs');
@@ -63,6 +62,25 @@ app.post("/moment", (req,res) =>{
     });
 });
 
+app.post("/place", (req,res) =>{
+
+    const latmin=req.body.latp*0.99997;
+    const latmax=req.body.latp*1.00005;
+    const longmax=req.body.latp*0.99997;
+    const longmin=req.body.latp*1.00005;
+
+    let querym= "SELECT fecha, hora FROM gps_data WHERE  (latitud > ' "+latmin+" '  AND  latitud < ' "+latmax+" ') AND (longitud > ' "+longmin+" ' AND longitud < ' "+longmax+" ')";
+    
+    cnx.pool.query(querym, (err,rows) => {
+        if (err) throw err;
+        res.json({
+            "datap" : rows
+        })
+    });
+    console.log(datap);
+
+}); 
+
 /*
 */
 
@@ -78,5 +96,8 @@ const port = 80;
 app.listen(port, () => {
     console.log("server on port: ",port)
 });
+
+
+
 
 cnx.connect();
