@@ -62,7 +62,7 @@ app.post("/moment", (req,res) =>{
     });
 });
 
-app.post("/place", (req,res) =>{
+app.post("/place", (req,resp) =>{
 
     let latmin=req.body.latp*0.99997;
     let latmax=req.body.latp*1.00005;
@@ -73,7 +73,7 @@ app.post("/place", (req,res) =>{
     
     cnx.pool.query(querym, (err,rows) => {
         if (err) throw err;
-        res.json({
+        resp.json({
             "datap" : rows
         })
     });
