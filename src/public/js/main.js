@@ -133,22 +133,22 @@ button.addEventListener("click", async (event) =>{
     }    
  })
 
+marker1 = new L.marker([11.04, -74.769], {icon: pinguino});
 
-function OnMapMove() {
+function mouse() {
 
     map.on("mousemove", function(e) {
         let position=e.latlng; 
         lati=position.lat
         long=position.lng
-        marker1 = new L.marker([lati,long], {icon: penguinMarker});
+        
         marker1.setLatLng([lati,long])
     })
 
 
 }
-
+mouse()
   
-map.on('click', onMapClick);
 
 async function marcador(){
   const data = {
