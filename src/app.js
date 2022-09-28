@@ -48,9 +48,9 @@ app.get("/data", (req,res) =>{
             });
     });
 });
-app.get("/place", (req,res) =>{
+app.get("/place", (req,resp) =>{
     cnx.pool.query("SELECT fecha, hora FROM gps_data WHERE  (latitud > ' "+latmin+" '  AND  latitud < ' "+latmax+" ') AND (longitud > ' "+longmin+" ' AND longitud < ' "+longmax+" ')", (err,rows) => {
-            res.json({
+            resp.json({
                 "time":  rows[0].hora,
                 "date":  moment(rows[0].fecha).format("DD/MM/YYYY"),
             });
@@ -70,7 +70,7 @@ app.post("/moment", (req,res) =>{
     });
 });
 
-app.post("/place", (req,res) =>{
+app.post("/place", (req,resp) =>{
 
     let latmin=req.body.latp*0.99997;
     let latmax=req.body.latp*1.00005;
@@ -81,7 +81,7 @@ app.post("/place", (req,res) =>{
     
     cnx.pool.query(querym, (err,rows) => {
         if (err) throw err;
-        res.json({
+        resp.json({
             "datap" : rows
         })
     });
