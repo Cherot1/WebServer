@@ -89,7 +89,7 @@ app.post("/place", (req,res) =>{
             "datap" : rows
         })
     });
-       // console.log(data);//
+       console.log(datap);//
 }); 
 
 
