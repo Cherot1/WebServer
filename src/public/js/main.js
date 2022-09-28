@@ -144,8 +144,8 @@ async function marcador(){
     map.on('mousemove',function(e) {
         let position=e.latlng;
         lati=position.lat
-        long=position.long
-        marker1.setLatLng([lati,long])
+        long=position.lng
+        marker1.setLatLng([lati,lng])
     });
 
 
