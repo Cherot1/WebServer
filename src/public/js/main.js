@@ -154,7 +154,7 @@ function onMapClick(e) {
 map.on('click', onMapClick);
 
 async function marcador(){
-    const data = {
+    const datap = {
 
         latp: lati,
         longp: long,
@@ -165,11 +165,11 @@ async function marcador(){
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(datap),
     });
     
     const historicPlace = await res.json();
-    placeHistoricData = (historicPlace.data)
+    placeHistoricData = historicPlace.data;
     console.log(placeHistoricData);
 }
 
