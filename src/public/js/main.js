@@ -129,3 +129,19 @@ button.addEventListener("click", async (event) =>{
         } 
     }    
  })
+var cont=0;
+function onMapClick(e) {
+    if (cont==0){
+         marker1 = new L.marker(e.latlng, {draggable:'true', icon: pinguino});
+    }
+    marker1.on('dragend', function(event){
+      var marker1 = event.target;
+      var position = marker1.getLatLng();
+      marker.setLatLng(new L.LatLng(position.lat, position.lng),{draggable:'true'});
+      map.panTo(new L.LatLng(position.lat, position.lng))
+    });
+    map.addLayer(marker1);
+    cont=cont+1;
+  };
+  
+  map.on('click', onMapClick);
