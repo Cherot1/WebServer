@@ -164,6 +164,6 @@ function onMapClick(e) {
     });
 
     const historicPlace = await res.json();
-    placeHistoricData = historicPlace.pdata 
+    placeHistoricData = historicPlace.data 
   }
 
