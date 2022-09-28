@@ -65,7 +65,6 @@ app.post("/moment", (req,res) =>{
 app.post("/place", (req,res) =>{
 
     let querym= "SELECT fecha, hora FROM gps_data WHERE  (latitud > '"+req.body.latp+"*0.99997'  AND  latitud < '"+req.body.latp+"*1.00005') AND (longitud > '"+req.body.latp+"*1.00005' AND longitud < '"+req.body.latp+"*1.00005)"  
-    l
     cnx.pool.query(querym, (err,rows) => {
         if (err) throw err;
         res.json({
