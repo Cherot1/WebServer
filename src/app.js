@@ -88,7 +88,7 @@ app.post("/place", (req,res) =>{
             "data" : rows
         })
     });
-        console.log(rows);
+        console.log(data);
 });
 
 

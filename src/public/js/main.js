@@ -148,7 +148,7 @@ function onMapClick(e) {
 
     map.addLayer(marker1);
     cont=cont+1;
-}; 
+}
 
   
 map.on('click', onMapClick);
@@ -171,8 +171,7 @@ async function marcador(){
     const historicPlace = await res.json();
     placeHistoricData = historicPlace.data 
     //console.log(placeHistoricData);
-};
+}
 
-
-let inte = setInterval(()=>{marcador()}, 1000);
+let inte = setInterval(()=>{marcador()}, 1000)
 
