@@ -89,9 +89,10 @@ app.post("/place", (req,res) =>{
             "datap" : rows
         })
 
-        console.log(datap);
+        
     });
-       
+    console.log(datap.fecha);
+
 }); 
 
 
