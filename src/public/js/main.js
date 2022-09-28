@@ -142,6 +142,7 @@ function onMapClick(e) {
       //marker1.bindPopup("Fecha:"+placeHistoricData.fecha+",Hora:"+placeHistoricData.hora,{draggable:'true'});
     });
     var popup = L.popup().setLatLng(position).setContent("Fecha:"+placeHistoricData.fecha+",Hora:"+placeHistoricData.hora).openOn(map);
+    map.addLayer(popup);
     map.addLayer(marker1);
     cont=cont+1;
   };
