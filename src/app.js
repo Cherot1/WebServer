@@ -68,6 +68,7 @@ app.post("/place", (req,res) =>{
     const latmax=req.body.latp*1.00005;
     const longmax=req.body.latp*0.99997;
     const longmin=req.body.latp*1.00005;
+    console.log(latmin);
 
     let querym= "SELECT fecha, hora FROM gps_data WHERE  (latitud > "+latmin+"  AND  latitud < "+latmax+") AND (longitud > "+longmin+" AND longitud < "+longmax+")";
     
