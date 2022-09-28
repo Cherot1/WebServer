@@ -56,8 +56,8 @@ var pinguino = L.icon({
     popupAnchor:  [10, -20]
 })
 
-marker = L.marker([11.022, -74.869], {icon: penguinMarker});
-marker1 = L.marker([11.04, -74.864], {icon: pinguino});
+marker = L.marker([11.022, -74.869], {icon: penguinMarker})
+
 var polyline;
 var polylinePoints;
 let lat = 0;
@@ -134,19 +134,19 @@ button.addEventListener("click", async (event) =>{
 
 var cont=0;
 
+marker1 = L.marker([11.094, -74.864], {icon: pinguino})
 
-map.on('mousemove',function(e) {
-    let position=e.latlng;
-    lati=position.lat
-    long=position.long
-    marker1.setLatLng([lati,long])
-});
 
 
 async function marcador(){
 
    
-
+    map.on('mousemove',function(e) {
+        let position=e.latlng;
+        lati=position.lat
+        long=position.long
+        marker1.setLatLng([lati,long])
+    });
 
 
     
