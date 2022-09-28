@@ -130,6 +130,7 @@ button.addEventListener("click", async (event) =>{
         } 
     }    
  })
+
 var cont=0;
 function onMapClick(e) {
     if (cont==0){
@@ -144,14 +145,15 @@ function onMapClick(e) {
       lati=position.lat;
       long=position.lng;
     });
-    
+
     map.addLayer(marker1);
     cont=cont+1;
-  };
-  
-  map.on('click', onMapClick);
+}; 
 
-  async function marcador(){
+  
+map.on('click', onMapClick);
+
+async function marcador(){
     const data = {
 
         latp: lati,
@@ -170,5 +172,7 @@ function onMapClick(e) {
     placeHistoricData = historicPlace.data 
     //console.log(placeHistoricData);
    }
-   let inte = setInterval(()=>{marcador()}, 1000);
+
+
+let inte = setInterval(()=>{marcador()}, 1000);
 
