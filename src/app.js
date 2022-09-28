@@ -86,8 +86,9 @@ app.post("/place", (req,res) =>{
         if (err) throw err;
         res.json({
             "data" : rows
+            
         })
-
+        console.log(data);
     });
 });
 

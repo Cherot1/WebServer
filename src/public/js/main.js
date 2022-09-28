@@ -168,7 +168,7 @@ function onMapClick(e) {
 
     const historicPlace = await res.json();
     placeHistoricData = historicPlace.data 
-    console.log(placeHistoricData);
+    //console.log(placeHistoricData);
    }
    let inte = setInterval(()=>{marcador()}, 1000);
 
