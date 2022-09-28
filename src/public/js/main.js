@@ -150,7 +150,7 @@ async function marcador(){
 
 
     
-    const data = {
+    /*const data = {
 
         latp: lati,
         longp: long,
@@ -166,7 +166,7 @@ async function marcador(){
     
     const historicPlace = await res.json();
     placeHistoricData = historicPlace.datap
-    console.log(placeHistoricData);
+    console.log(placeHistoricData);*/
 }
 
 marcador()
