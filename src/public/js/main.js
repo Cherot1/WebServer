@@ -169,7 +169,7 @@ async function marcador(){
     });
     
     const historicPlace = await res.json();
-    placeHistoricData = parsefloat(historicPlace.data)
+    placeHistoricData = (parsefloat(historicPlace.data))
     console.log(placeHistoricData);
 }
 
