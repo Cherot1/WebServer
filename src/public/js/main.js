@@ -141,8 +141,6 @@ function onMapClick(e) {
       map.panTo(new L.LatLng(position.lat, position.lng))
       //marker1.bindPopup("Fecha:"+placeHistoricData.fecha+",Hora:"+placeHistoricData.hora,{draggable:'true'});
     });
-    var popup = L.popup().setLatLng(position).setContent("Fecha:"+placeHistoricData.fecha+",Hora:"+placeHistoricData.hora).openOn(map);
-    map.addLayer(popup);
     map.addLayer(marker1);
     cont=cont+1;
   };
