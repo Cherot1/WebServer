@@ -85,7 +85,7 @@ app.post("/place", (req,res) =>{
     cnx.pool.query(querym, (err,rows) => {
         if (err) throw err;
         res.json({
-            "tm":  rows[0].hora,
+            //"tm":  rows[0].hora,
             "dt":  moment(rows[0].fecha).format("DD/MM/YYYY"),
             
         })
