@@ -88,6 +88,8 @@ app.post("/place", (req,res) =>{
         res.json({
             "datap" : rows
         })
+
+        console.log(datap);
     });
        
 }); 

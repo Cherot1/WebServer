@@ -141,7 +141,7 @@ function onMapClick(e) {
       var position = marker1.getLatLng();
       marker1.setLatLng(new L.LatLng(position.lat, position.lng),{draggable:'true'});
       map.panTo(new L.LatLng(position.lat, position.lng));
-      marker1.bindPopup("Fecha:"+placeHistoricData.fecha+",Hora:"+placeHistoricData.hora,{draggable:'true'});
+      marker1.bindPopup("Fecha:"+placeHistoricData.fecha+",Hora:"+placeHistoricData.hora);
       lati=position.lat;
       long=position.lng;
     });
@@ -154,7 +154,7 @@ function onMapClick(e) {
 map.on('click', onMapClick);
 
 async function marcador(){
-    const datap = {
+    const data = {
 
         latp: lati,
         longp: long,
@@ -165,13 +165,13 @@ async function marcador(){
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(datap),
+        body: JSON.stringify(data),
     });
     
     const historicPlace = await res.json();
-    placeHistoricData = historicPlace.datap 
+    placeHistoricData = historicPlace.datap
     console.log(placeHistoricData);
 }
 
-let inte = setInterval(()=>{marcador()}, 1000)
+let inte = setInterval(()=>{marcador()}, 5000)
 
