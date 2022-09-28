@@ -7,9 +7,8 @@ const dgram = require('dgram');
 
 const cnx = require('./cnx');
 const moment = require("moment");
-
+var datap;
 const app = express();
-
 // setting the server
 app.engine('ejs', engine);
 app.set('view engine', 'ejs');
@@ -26,7 +25,7 @@ const udpPort = parseInt(process.env.UDP_PORT);
 udp.on('listening', () => {
 console.log("UDP Server:  ", udpPort);
 });
-let datap = [0, 0];
+
 let data = [0, 0, 0, 0];
 let data_bk = [0, 0, 0, 0];
 udp.on('message', (msg) =>{
