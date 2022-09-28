@@ -171,7 +171,7 @@ async function marcador(){
         body: JSON.stringify(datap),
     });
     console.log(datap);
-    const historicPlace = await resp.json();
+    const historicPlace = await res.json();
     placeHistoricDatap = historicPlace.datap;
     console.log(placeHistoricDatap);
 }
