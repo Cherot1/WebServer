@@ -140,7 +140,8 @@ function OnMapMove() {
         let position=e.latlng; 
         lati=position.lat
         long=position.lng
-        marker1.setLatLng([lati,long],{icon: pinguino})
+        marker1 = new L.marker([lati,long], {icon: penguinMarker});
+        marker1.setLatLng([lati,long])
     })
 
 
