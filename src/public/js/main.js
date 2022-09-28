@@ -141,7 +141,7 @@ function onMapClick(e) {
       map.panTo(new L.LatLng(position.lat, position.lng))
       
     });
-    marker1.bindPopup("Fecha:"+placeHistoricData.fecha+",Hora:"+placeHistoricData.hora), {draggable: 'true'};
+
     map.addLayer(marker1);
     cont=cont+1;
   };
@@ -165,5 +165,6 @@ function onMapClick(e) {
 
     const historicPlace = await res.json();
     placeHistoricData = historicPlace.data 
+    marker1.bindPopup("Fecha:"+placeHistoricData.fecha+",Hora:"+placeHistoricData.hora), {draggable: 'true'};
   }
 
