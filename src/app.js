@@ -90,7 +90,7 @@ app.post("/place", (req,res) =>{
             "data" : rows
         })
     });
-        console.log(data);
+       // console.log(data);
 }); 
 
 
