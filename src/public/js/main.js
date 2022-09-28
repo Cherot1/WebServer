@@ -137,7 +137,7 @@ function onMapClick(e) {
     marker1.on('dragend', function(event){
       var marker1 = event.target;
       var position = marker1.getLatLng();
-      marker.setLatLng(new L.LatLng(position.lat, position.lng),{draggable:'true'});
+      marker1.setLatLng(new L.LatLng(position.lat, position.lng),{draggable:'true'});
       map.panTo(new L.LatLng(position.lat, position.lng))
     });
     map.addLayer(marker1);
