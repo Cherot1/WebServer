@@ -140,8 +140,7 @@ function onMapClick(e) {
       marker1.setLatLng(new L.LatLng(position.lat, position.lng),{draggable:'true'});
       map.panTo(new L.LatLng(position.lat, position.lng))
       //marker1.bindPopup("Fecha:"+placeHistoricData.fecha+",Hora:"+placeHistoricData.hora,{draggable:'true'});
-      var tooltip = L.tooltip(position, {content: "Fecha:"+placeHistoricData.fecha+",Hora:"+placeHistoricData.hora})
-      .addTo(map);
+      var popup = L.popup().setLatLng(position).setContent("Fecha:"+placeHistoricData.fecha+",Hora:"+placeHistoricData.hora).openOn(map);
     });
 
     map.addLayer(marker1);
