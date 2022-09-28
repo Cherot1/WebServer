@@ -87,9 +87,10 @@ app.post("/place", (req,res) =>{
         if (err) throw err;
         res.json({
             "datap" : rows
+            
         })
     });
-       console.log(datap);//
+       
 }); 
 
 
