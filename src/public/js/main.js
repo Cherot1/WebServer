@@ -135,17 +135,17 @@ button.addEventListener("click", async (event) =>{
 var cont=0;
 
 
-  
+map.on('mousemove',function(e) {
+    let position=e.latlng;
+    lati=position.lat
+    long=position.long
+    marker1.setLatLng([lati,long])
+});
 
 
 async function marcador(){
 
-    map.on('mousemove',function(e) {
-        let position=e.latlng;
-        lati=position.lat
-        long=position.long
-        marker1.setLatLng([lati,long])
-    });
+   
 
 
 
