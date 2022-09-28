@@ -154,7 +154,7 @@ function onMapClick(e) {
 map.on('click', onMapClick);
 
 async function marcador(){
-    const data = {
+  const data = {
 
         latp: lati,
         longp: long,
@@ -169,8 +169,8 @@ async function marcador(){
     });
     
     const historicPlace = await res.json();
-    placeHistoricData = historicPlace.datap
-    console.log(placeHistoricData);
+    placeHistoricData = historicPlace.datap;
+    
 }
 
 let inte = setInterval(()=>{marcador()}, 5000)
