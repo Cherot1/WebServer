@@ -142,11 +142,12 @@ function onMapClick(e) {
       marker1.setLatLng(new L.LatLng(position.lat, position.lng),{draggable:'true'});
       map.panTo(new L.LatLng(position.lat, position.lng));
       marker1.bindPopup("Fecha:"+placeHistoricData.fecha+",Hora:"+placeHistoricData.hora);
+      lati=position.lat;
+      long=position.lng;
+      console.log(lati);
+      console.log(long);
     });
-    lati=position.lat;
-    long=position.lng;
-    console.log(lati);
-    console.log(long);
+
     map.addLayer(marker1);
     cont=cont+1;
 }
