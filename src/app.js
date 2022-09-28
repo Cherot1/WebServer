@@ -64,8 +64,8 @@ app.post("/moment", (req,res) =>{
 
 app.post("/place", (req,res) =>{
 
-    const lat=req.body.latp;
-    const long=req.body.latp;
+    const lat= req.body.latp
+    const long= req.body.latp
 
     let querym= "SELECT fecha, hora FROM gps_data WHERE latitud BETWEEN ("+lat+"*0.99997)  AND  ("+lat+"*1.00005) AND longitud BETWEEN ( "+long+"*1.00005) AND ("+long+"*0.99995)";
     
