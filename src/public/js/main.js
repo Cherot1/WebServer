@@ -1,5 +1,6 @@
 var date = new Date();
-var ptn;
+var lati;
+var long;
 start_time = document.getElementById('start_time');
 start_date = document.getElementById('start_date');
 end_time = document.getElementById('end_time');
