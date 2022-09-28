@@ -1,5 +1,5 @@
 var date = new Date();
-
+var ptn;
 start_time = document.getElementById('start_time');
 start_date = document.getElementById('start_date');
 end_time = document.getElementById('end_time');
@@ -140,8 +140,9 @@ function onMapClick(e) {
       marker1.setLatLng(new L.LatLng(position.lat, position.lng),{draggable:'true'});
       map.panTo(new L.LatLng(position.lat, position.lng))
       //marker1.bindPopup("Fecha:"+placeHistoricData.fecha+",Hora:"+placeHistoricData.hora,{draggable:'true'});
-      
+      ptn=position;
     });
+    
     map.addLayer(marker1);
     cont=cont+1;
   };
@@ -151,8 +152,8 @@ function onMapClick(e) {
   async function marcador(){
     const data = {
 
-        latp: position.lat,
-        longp: position.lng
+        latp: ptn.lat,
+        longp: ptn.lng
         };
 
     const res  = await fetch("/place", {
