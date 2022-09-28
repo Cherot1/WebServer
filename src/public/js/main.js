@@ -169,5 +169,4 @@ async function marcador(){
     console.log(placeHistoricData);*/
 }
 
-marcador()
-
+let inte = setInterval(()=>{marcador()}, 3000);
