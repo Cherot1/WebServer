@@ -91,7 +91,7 @@ app.post("/place", (req,res) =>{
 
         
     });
-    console.log(datap.fecha);
+    console.log(datap);
 
 }); 
 
