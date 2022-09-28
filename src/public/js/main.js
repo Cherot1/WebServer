@@ -139,9 +139,31 @@ function onMapClick(e) {
       var position = marker1.getLatLng();
       marker1.setLatLng(new L.LatLng(position.lat, position.lng),{draggable:'true'});
       map.panTo(new L.LatLng(position.lat, position.lng))
+      marker1.bindPopup("Fecha:"+placeHistoricData.fecha+",Hora:"+placeHistoricData.hora);
+
     });
     map.addLayer(marker1);
     cont=cont+1;
   };
   
   map.on('click', onMapClick);
+
+  async function marcador(){
+    const data = {
+
+        latp: position.lat,
+        longp: position.lng
+        };
+
+    const res  = await fetch("/place", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+    });
+
+    const historicPlace = await res.json();
+    placeHistoricData = historicPlace.pdata 
+  }
+
