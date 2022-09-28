@@ -79,9 +79,9 @@ app.listen(port, () => {
 });
 
 app.use(express.json({limit: '1mb'}));
-app.post("/place", (req,res) =>{
+app.post("./place", (req,res) =>{
 
-    let querym= "SELECT fecha, hora FROM gps_data WHERE latitud BETWEEN (' "+req.body.latp+"'*0.99997 ) AND  ('"+req.body.latp+"'*1.00005 ) AND longitud BETWEEN (' "+req.body.lonp+"'*1.00005) AND  (' "+req.body.lonp+"'*0.99997 )";
+    let querym= "SELECT fecha, hora FROM gps_data WHERE latitud BETWEEN ('"+req.body.latp+"'*0.99997 ) AND  ('"+req.body.latp+"'*1.00005 ) AND longitud BETWEEN (' "+req.body.lonp+"'*1.00005) AND  (' "+req.body.lonp+"'*0.99997 )";
     
     cnx.pool.query(querym, (err,rows) => {
         if (err) throw err;
