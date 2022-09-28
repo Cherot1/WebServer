@@ -69,7 +69,7 @@ app.post("/place", (req,res) =>{
     let longmax=req.body.latp*0.99997;
     let longmin=req.body.latp*1.00005;
 
-    let querym= "SELECT fecha, hora FROM gps_data WHERE  (latitud > "+latmin+"  AND  latitud < "+latmax+" ) AND (longitud > "+longmin+" AND longitud < "+longmax+")";
+    let querym= "SELECT fecha, hora FROM gps_data WHERE  (latitud > ' "+latmin+" '  AND  latitud < ' "+latmax+" ') AND (longitud > ' "+longmin+" ' AND longitud < ' "+longmax+" ')";
     
     cnx.pool.query(querym, (err,rows) => {
         if (err) throw err;
