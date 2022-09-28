@@ -1,3 +1,5 @@
+const e = require("express");
+
 var date = new Date();
 var lati;
 var long;
@@ -131,23 +133,17 @@ button.addEventListener("click", async (event) =>{
     }    
  })
 
-var cont=0;
-function onMapClick(e) {
-    if (cont==0){
-         marker1 = new L.marker(e.latlng, {draggable:'true', icon: pinguino});
-    }
-    marker1.on('dragend', function(event){
-      var marker1 = event.target;
-      var position = marker1.getLatLng();
-      marker1.setLatLng(new L.LatLng(position.lat, position.lng),{draggable:'true'});
-      map.panTo(new L.LatLng(position.lat, position.lng));
-      marker1.bindPopup("Fecha:"+placeHistoricData.fecha+",Hora:"+placeHistoricData.hora);
-      lati=position.lat;
-      long=position.lng;
-    });
 
-    map.addLayer(marker1);
-    cont=cont+1;
+function OnMapMove() {
+
+    map.on("mousemove", function(e) {
+        let position=e.latlng; 
+        lati=position.lat
+        long=position.lng
+        marker1.setLatLng([lati,long],{icon: pinguino})
+    })
+
+
 }
 
   
