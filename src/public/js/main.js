@@ -135,7 +135,9 @@ button.addEventListener("click", async (event) =>{
 
 marker1 = new L.marker([11.04, -74.769], {icon: pinguino});
 
-function mouse() {
+  
+async function marcador(){
+
 
     map.on("mousemove", function(e) {
         let position=e.latlng; 
@@ -145,12 +147,6 @@ function mouse() {
         marker1.setLatLng([lati,long])
     })
 
-
-}
-mouse()
-  
-
-async function marcador(){
   const data = {
 
         latp: lati,
