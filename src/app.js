@@ -69,7 +69,7 @@ app.post("/place", (req,res) =>{
     cnx.pool.query(querym, (err,rows) => {
         if (err) throw err;
         res.json({
-            "data" : rows
+            "datap" : rows
         })
     });
     console.log(data);

@@ -113,7 +113,7 @@ button.addEventListener("click", async (event) =>{
         body: JSON.stringify(data),
     });
     const historicData = await res.json();
-    gpsHistoricData = historicData.data
+    gpsHistoricData = historicData.datap
     
     var arr1 = [];
     var arr2 = [];
