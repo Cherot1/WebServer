@@ -160,6 +160,7 @@ async function marcador(){
         longp: long,
         };
 
+
     const res  = await fetch("/place", {
         method: "POST",
         headers: {
@@ -167,7 +168,7 @@ async function marcador(){
         },
         body: JSON.stringify(datap),
     });
-    
+    console.log(datap);
     const historicPlace = await res.json();
     placeHistoricData = historicPlace.datap;
     console.log(placeHistoricData);
