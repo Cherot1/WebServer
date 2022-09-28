@@ -164,5 +164,6 @@ function onMapClick(e) {
 
     const historicPlace = await res.json();
     placeHistoricData = historicPlace.data 
+    console.log(placeHistoricData);
    }
 
