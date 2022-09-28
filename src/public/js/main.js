@@ -140,7 +140,8 @@ function onMapClick(e) {
       marker1.setLatLng(new L.LatLng(position.lat, position.lng),{draggable:'true'});
       map.panTo(new L.LatLng(position.lat, position.lng))
       //marker1.bindPopup("Fecha:"+placeHistoricData.fecha+",Hora:"+placeHistoricData.hora,{draggable:'true'});
-      ptn=position;
+      lati=position.lat;
+      long=position.lng;
     });
     
     map.addLayer(marker1);
@@ -152,8 +153,8 @@ function onMapClick(e) {
   async function marcador(){
     const data = {
 
-        latp: ptn.lat,
-        longp: ptn.lng
+        latp: lati,
+        longp: long
         };
 
     const res  = await fetch("/place", {
