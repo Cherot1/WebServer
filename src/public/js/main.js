@@ -171,7 +171,7 @@ async function marcador(){
     const historicPlace = await res.json();
     placeHistoricData = historicPlace.data 
     //console.log(placeHistoricData);
-   }
+};
 
 
 let inte = setInterval(()=>{marcador()}, 1000);
