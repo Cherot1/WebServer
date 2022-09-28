@@ -134,7 +134,7 @@ button.addEventListener("click", async (event) =>{
 
 var cont=0;
 
-marker1 = L.marker([11.094, -74.864], {icon: pinguino})
+marker1 = new L.marker([11.094, -74.864], {icon: pinguino})
 
 
 
