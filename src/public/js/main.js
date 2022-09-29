@@ -156,26 +156,35 @@ function onMapClick(e) {
 map.on('click', onMapClick);
 
 async function marcador(){
-    const datap = {
+
+   
+    map.on('mousemove',function(e) {
+        let position=e.latlng;
+        lati=position.lat
+        long=position.lng
+        marker1.setLatLng([lati,long])
+        map.addLayer(marker1);
+    });
+
+
+    
+    const data = {
 
         latp: lati,
-        longp: long,
+        longp: long
         };
-
-
+        console.log(lati);
     const res  = await fetch("/place", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(datap),
+        body: JSON.stringify(data),
     });
-    console.log(datap);
-    const historicPlace = await res.json();
-    placeHistoricDatap = historicPlace.datap;
-    console.log(placeHistoricDatap);
-
     
+    const historicPlace = await res.json();
+    placeHistoricData = historicPlace.datap
+    console.log(placeHistoricData);
 }
 
 let inte = setInterval(()=>{marcador()}, 5000)
