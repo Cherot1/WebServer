@@ -62,6 +62,8 @@ let lat = 0;
 let lon = 0;
 let prelat = 0;
 let prelon = 0;
+var lati = 0;
+var long = 0;
 
 async function getData(){
     const response = await fetch("./data", {});
@@ -137,8 +139,7 @@ button.addEventListener("click", async (event) =>{
 
 async function marcador(){
 
-   var lati;
-   var long;
+   
     map.on('mousemove',function(e) {
         let position=e.latlng;
         lati=position.lat
