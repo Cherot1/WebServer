@@ -1,6 +1,4 @@
 var date = new Date();
-var lati;
-var long;
 start_time = document.getElementById('start_time');
 start_date = document.getElementById('start_date');
 end_time = document.getElementById('end_time');
@@ -57,7 +55,7 @@ var pinguino = L.icon({
 })
 
 marker = L.marker([11.022, -74.869], {icon: penguinMarker})
-
+marker1 = L.marker([11.027, -74.669], {icon: pinguino})
 var polyline;
 var polylinePoints;
 let lat = 0;
@@ -133,7 +131,7 @@ button.addEventListener("click", async (event) =>{
  })
 
 
-marker1 = new L.marker([11.094, -74.864], {icon: pinguino});
+
 
 
 
@@ -142,9 +140,10 @@ async function marcador(){
    
     map.on('mousemove',function(e) {
         let position=e.latlng;
-        lati=position.lat;
-        long=position.lng;
-        marker1.setLatLng([lati,long]);
+        lati=position.lat
+        long=position.lng
+        marker1.setLatLng([lati,long])
+        map.addLayer(marker1);
     });
 
 
