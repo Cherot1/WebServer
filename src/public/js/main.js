@@ -153,7 +153,6 @@ function onMapClick(e) {
 }
 
   
-map.on('click', onMapClick);
 
 async function marcador(){
 
