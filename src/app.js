@@ -62,7 +62,9 @@ app.get("/data", (req,res) =>{
 app.use(express.json({limit: '1mb'}));
 app.post("/moment", (req,res) =>{
 
-    let btwDateQuery = "SELECT latitud, longitud FROM gps_data WHERE ( fecha = '"+req.body.sdate+"' AND hora > '"+req.body.stime+":00' ) OR ( fecha > '" +req.body.sdate+"' AND fecha < '"+req.body.edate+"' ) OR ( fecha = '"+req.body.edate+"' AND hora < '"+req.body.etime+":00' )";
+    let btwDateQuery =  "SELECT latitud, longitud FROM gps_data WHERE ( fecha = '"+req.body.sdate+"' AND hora > '"+req.body.stime+":00' )"
+                        + "OR ( fecha > '" +req.body.sdate+"' AND fecha < '"+req.body.edate+"' )"
+                        + "OR ( fecha = '"+req.body.edate+"' AND hora < '"+req.body.etime+":00' )";
 
     cnx.pool.query(btwDateQuery, (err,rows) => {
         if (err) throw err;
@@ -72,9 +74,19 @@ app.post("/moment", (req,res) =>{
     });
 });
 
-/*
-*/
+app.post("/place", (req,res) =>{
+    let querym=     "SELECT DISTINCT fecha, hora FROM gps_data WHERE latitud BETWEEN "
+                    + "('"+req.body.latp+"'*0.99997) and ('"+req.body.latp+"'*1.00005) and longitud BETWEEN "
+                    + "('"+req.body.longp+"'*1.00005) and ('"+req.body.longp+"'*0.99997)"
 
+
+    cnx.pool.query(querym, (err,rows) => {
+        if (err) throw err;
+        res.json({
+            "datap" : rows
+        })
+    });
+});
 
 
 //routes

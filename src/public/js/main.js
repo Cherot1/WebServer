@@ -33,27 +33,42 @@ end_date.addEventListener('click', function (){
     end_date.min = start_date.value;
 })
 
-
+// LEAFLET SETTINGS
 // build leaflet map with a specific template
-const map = L.map('map-template', {zoomControl: true}).setView([10.965633, -74.8215339], 12.5);const tileURL = 'https://tile.openstreetmap.de/{z}/{x}/{y}.png';
+const map = L.map('map-template', {zoomControl: true}).setView([10.965633, -74.8215339], 14);const tileURL = 'https://tile.openstreetmap.de/{z}/{x}/{y}.png';
 L.tileLayer(tileURL).addTo(map);
 
+/* CREATING MARKERS */
+//Last position marker
 var penguinMarker = L.icon({
     iconUrl: 'penguinMarker.png',
     iconSize: [35,39.5],
     shadowSize:   [50, 64],
-    iconAnchor:   [10,20],
+    iconAnchor:   [20,40],
+    shadowAnchor: [4, 62],
+    popupAnchor:  [10, -20]
+});
+
+// Historic onClick marker
+var histPenguinMarker = L.icon({
+    iconUrl: 'penguinHistIcon.png',
+    iconSize: [35,39.5],
+    shadowSize:   [50, 64],
+    iconAnchor:   [20,40],
     shadowAnchor: [4, 62],
     popupAnchor:  [10, -20]
 })
 
-marker = L.marker([11.022, -74.869], {icon: penguinMarker})
+//Giving an initial value to the marker
+marker = L.marker([11, -74], {icon: penguinMarker})
+
 var polyline;
 var polylinePoints;
 let lat = 0;
 let lon = 0;
 let prelat = 0;
 let prelon = 0;
+
 
 async function getData(){
     const response = await fetch("./data", {});
@@ -65,7 +80,7 @@ async function getData(){
     lat = parseFloat(responseJson.lat);
     lon = parseFloat(responseJson.lon);
 
-    if(responseJson.lat != 0){
+    if(responseJson.lat !== 0){
         map.removeLayer(marker);
         marker = new L.marker([parseFloat(responseJson.lat), parseFloat(responseJson.lon)], {icon: penguinMarker});
         marker.bindPopup("lat:"+responseJson.lat+",lon:"+responseJson.lon);
@@ -73,20 +88,19 @@ async function getData(){
 
         polylinePoints = [[prelat, prelon], [lat, lon] ]
 
-        if (prelat != 0){
+        if (prelat !== 0){
             polyline = L.polyline(polylinePoints).addTo(map)
         }
     }
     prelat = lat;
     prelon = lon;
 }
+setInterval(()=>{getData()}, 3000);
 
-let interval = setInterval(()=>{getData()}, 3000);
 
 function centerMap() {
-    map.setView([lat,lon],14);
+    map.setView([lat,lon],15);
 }
-
 
 button = document.getElementById('historics');
 button.addEventListener("click", async (event) =>{
@@ -112,12 +126,61 @@ button.addEventListener("click", async (event) =>{
         origin = [parseFloat(gpsHistoricData[i-1].latitud),parseFloat(gpsHistoricData[i-1].longitud)];
         destin = [parseFloat(gpsHistoricData[i].latitud),parseFloat(gpsHistoricData[i].longitud)];
         var polylineHistPoints = [origin,destin];
-        arr1.push(parseFloat(gpsHistoricData[i-1].latitud) - parseFloat(gpsHistoricData[i].latitud))
-        arr2.push(parseFloat(gpsHistoricData[i-1].longitud) - parseFloat(gpsHistoricData[i].longitud))
-        if(arr1[arr1.length - 1] <= 0.00080333){
-            if(arr1[arr2.length - 1] <= 0.000207845){
-                L.polyline(polylineHistPoints, { color: 'black', with: 2.0 }).addTo(map);
-            }
-        } 
-    }    
+        L.polyline(polylineHistPoints, { color: 'black', with: 2.0 }).addTo(map);
+    }
  })
+
+histMarker = L.marker([11.027, -74.669], {icon: histPenguinMarker});
+map.on('click', async(e) => {
+    if(pickingMap){
+        histMarker = histMarker.setLatLng(e.latlng);
+        map.addLayer(histMarker);
+
+        const data = {
+            latp    : e.latlng.lat,
+            longp   : e.latlng.lng
+        };
+
+        const res  = await fetch("/place", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        });
+
+        const historicPlace = await res.json();
+        placeHistoricData = historicPlace.datap
+        console.log(placeHistoricData.length);
+
+       try{
+            document.getElementById('RegisterDiv').remove();
+        } catch (err){
+
+        }
+
+        var div = document.createElement("ul");
+        div.setAttribute("id", "RegisterDiv");
+        div.append(document.createElement('br'))
+
+        document.getElementById('boxTitle').innerHTML = "El móvil estuvo en el punto seleccionado: "
+
+        if(placeHistoricData.length === 0){
+            document.getElementById('boxTitle').innerHTML = "El móvil NO ha estado en el punto seleccionado "
+        }
+
+        let cont = 0;
+        for (var i = 0; i < placeHistoricData.length; i++){
+            var item = document.createElement('li');
+
+            let date = new Date(placeHistoricData[i].fecha);
+            item.innerHTML = "El día " +date.toLocaleDateString('en-ZA')+ " a las " + placeHistoricData[i].hora;
+            div.append(item);
+
+            if(cont===20){
+                break;
+            }
+        }
+        document.getElementById('register').append(div);
+    }
+});

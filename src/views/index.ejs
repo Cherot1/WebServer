@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0e1842" />
     
-    <title>Penguin Tracker 🐧🗺️</title>
+    <title>Penguin Tracker</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 
     <!--Boxicons CDN Link-->
@@ -100,6 +100,12 @@
         </ul>
     </div>
     <div class="home_content">
+        <div id="onScreeBox">
+            <h3 id="boxTitle"></h3>
+            <div id="register">
+
+            </div>
+        </div>
         <div id="map-template"></div>
     </div>
 
@@ -116,10 +122,17 @@
             historic.classList.toggle("active");
             if(!historic.classList.contains('active')){
                 document.getElementById('recorridos').style = 'color: #0e1842; background: #c9d1ff;';
-                document.getElementById('pickingMap').style = 'color: #c9d1ff; background: #1f2e6c;';
+                document.getElementById('pickingMap').style = 'color: #ffffff; background: #1f2e6c;';
+                document.getElementById('onScreeBox').style = 'display: none;'
                 pickingMap = false;
+                map.removeLayer(histMarker);
+                try{
+                    document.getElementById('RegisterDiv').remove();
+                } catch (err){
+                }
+
             }else{
-                document.getElementById('recorridos').style = 'color: #c9d1ff; background: #1f2e6c;';
+                document.getElementById('recorridos').style = 'color: #ffffff; background: #1f2e6c;';
             }
             console.log(pickingMap)
         }
@@ -127,14 +140,24 @@
         pick.addEventListener('click',function (){
             if(!historic.classList.contains('active')) {
                 historic.classList.toggle("active");
-                document.getElementById('recorridos').style = 'color: #c9d1ff; background: #1f2e6c;'
+                document.getElementById('recorridos').style = 'color: #ffffff; background: #1f2e6c;'
             }
             if(!pickingMap){
                 pickingMap = true
-                document.getElementById('pickingMap').style = 'color: #1f2e6c; background: #c9d1ff;'
+                document.getElementById('onScreeBox').style = 'display: block;'
+                document.getElementById('pickingMap').style = 'color: #1f2e6c; background: #c9d1ff;';
+                document.getElementById('boxTitle').innerHTML = "Por favor, haga click en algún lugar del mapa"
+
             } else {
-                document.getElementById('pickingMap').style = 'color: #c9d1ff; background: #1f2e6c;'
+                document.getElementById('onScreeBox').style = 'display: none;'
+                document.getElementById('pickingMap').style = 'color: #ffffff; background: #1f2e6c;'
                 pickingMap = false;
+                map.removeLayer(histMarker);
+                try{
+                    document.getElementById('RegisterDiv').remove();
+                } catch (err){
+
+                }
             }
             console.log(pickingMap)
         });
