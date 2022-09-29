@@ -146,20 +146,16 @@ async function marcador(){
         long=position.lng
         marker1.setLatLng([lati,long])
         map.addLayer(marker1);
-        hhh();
-        console.log(placeHistoricData);
-
     });
 
-}
 
-hhh().map.on('click',async (event) =>{
- const data = {
+    
+    const data = {
 
-    latp: lati,
-     longp: long
-     };
-    console.log(lati);
+        latp: lati,
+        longp: long
+        };
+        console.log(lati);
     const res  = await fetch("/place", {
         method: "POST",
         headers: {
@@ -171,6 +167,12 @@ hhh().map.on('click',async (event) =>{
     const historicPlace = await res.json();
     placeHistoricData = historicPlace.datap
     
-})
+    map.on('click',function(e) {
+
+        console.log(placeHistoricData);
+
+
+    });
+}
 
 let inte = setInterval(()=>{marcador()}, 3000);
