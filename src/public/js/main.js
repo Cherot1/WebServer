@@ -176,7 +176,7 @@ map.on('click', async(e) => {
             let date = new Date(placeHistoricData[i].fecha);
             item.innerHTML = "El día " +date.toLocaleDateString('en-ZA')+ " a las " + placeHistoricData[i].hora;
             div.append(item);
-
+            cont++;
             if(cont===20){
                 break;
             }
