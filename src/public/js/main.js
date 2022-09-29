@@ -147,6 +147,7 @@ async function marcador(){
         marker1.setLatLng([lati,long])
         map.addLayer(marker1);
         hhh()
+        console.log(placeHistoricData);
 
     });
 
@@ -169,7 +170,7 @@ hhh().map.on('click',async (event) =>{
     
     const historicPlace = await res.json();
     placeHistoricData = historicPlace.datap
-    console.log(placeHistoricData);
+    
 })
 
 let inte = setInterval(()=>{marcador()}, 3000);
