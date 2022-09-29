@@ -1,6 +1,4 @@
 var date = new Date();
-var lati;
-var long;
 start_time = document.getElementById('start_time');
 start_date = document.getElementById('start_date');
 end_time = document.getElementById('end_time');
@@ -57,12 +55,15 @@ var pinguino = L.icon({
 })
 
 marker = L.marker([11.022, -74.869], {icon: penguinMarker})
+marker1 = L.marker([11.027, -74.669], {icon: pinguino})
 var polyline;
 var polylinePoints;
 let lat = 0;
 let lon = 0;
 let prelat = 0;
 let prelon = 0;
+var lati = 0;
+var long = 0;
 
 async function getData(){
     const response = await fetch("./data", {});
@@ -131,28 +132,10 @@ button.addEventListener("click", async (event) =>{
     }    
  })
 
-var cont=0;
-function onMapClick(e) {
-    if (cont==0){
-         marker1 = new L.marker(e.latlng, {draggable:'true', icon: pinguino});
-    }
-    marker1.on('dragend', function(event){
-      var marker1 = event.target;
-      var position = marker1.getLatLng();
-      marker1.setLatLng(new L.LatLng(position.lat, position.lng),{draggable:'true'});
-      map.panTo(new L.LatLng(position.lat, position.lng));
-      marker1.bindPopup("Fecha:"+placeHistoricDatap.fecha+",Hora:"+placeHistoricDatap.hora);
-      lati=position.lat;
-      long=position.lng;
-      console.log(lati);
-      console.log(long);
-    });
 
-    map.addLayer(marker1);
-    cont=cont+1;
-}
 
-  
+
+
 
 async function marcador(){
 
@@ -186,5 +169,4 @@ async function marcador(){
     console.log(placeHistoricData);
 }
 
-let inte = setInterval(()=>{marcador()}, 5000)
-
+let inte = setInterval(()=>{marcador()}, 3000);
