@@ -62,22 +62,21 @@ app.post("/moment", (req,res) =>{
     });
 });
 
+
 app.post("/place", (req,res) =>{
 
-    let latmin=req.body.latp*0.99997;
-    let latmax=req.body.latp*1.00005;
-    let longmax=req.body.latp*0.99997;
-    let longmin=req.body.latp*1.00005;
+   
+
 
     let querym= "SELECT DISTINCT fecha, hora FROM Datosgps.gps_data WHERE latitud BETWEEN ('"+req.body.latp+"'*0.99997) and ('"+req.body.latp+"'*1.00005) and longitud BETWEEN ('"+req.body.longp+"'*1.00005) and ('"+req.body.longp+"'*0.99997)  "
-    
+    console.log(req.body.latp);
     cnx.pool.query(querym, (err,rows) => {
         if (err) throw err;
         res.json({
-            "datap" : rows
+            datap : rows
         })
     });
-    console.log(datap);
+    
 
 }); 
 
