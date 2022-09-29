@@ -66,14 +66,16 @@ app.post("/place", (req,res) =>{
 
    
 
+
     let querym= "SELECT DISTINCT fecha, hora FROM Datosgps.gps_data WHERE latitud BETWEEN ('"+req.body.latp+"'*0.99997) and ('"+req.body.latp+"'*1.00005) and longitud BETWEEN ('"+req.body.longp+"'*1.00005) and ('"+req.body.longp+"'*0.99997)  "
+    console.log(querym);
     cnx.pool.query(querym, (err,rows) => {
         if (err) throw err;
         res.json({
             datap : rows
         })
     });
-    console.log(datap);
+    
 
 }); 
 
