@@ -64,10 +64,10 @@ app.post("/moment", (req,res) =>{
 
 app.post("/place", (req,res) =>{
 
-    const latsel =req.body.latp
-    const longsel =req.body.longp
+    const latsel =
+    const longsel =
 
-    let querym= "SELECT DISTINCT fecha, hora FROM gps_data WHERE latitud BETWEEN ("+latsel+"*0.99997) and ("+latsel+"*1.00005) and longitud BETWEEN ("+longsel+"*1.00005) and ("+longsel+"*0.99997)  "
+    let querym= "SELECT DISTINCT fecha, hora FROM gps_data WHERE latitud BETWEEN ('"+req.body.latp+"'*0.99997) and ('"+req.body.latp+"'*1.00005) and longitud BETWEEN ('"+req.body.longp+"'*1.00005) and ('"+req.body.longp+"'*0.99997)  "
     cnx.pool.query(querym, (err,rows) => {
         if (err) throw err;
         res.json({
@@ -77,6 +77,7 @@ app.post("/place", (req,res) =>{
     console.log(datap);
 
 }); 
+
 
 /*
 */
