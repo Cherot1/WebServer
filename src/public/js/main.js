@@ -167,7 +167,7 @@ async function marcador(){
     const historicPlace = await res.json();
     var placeHistoricData = historicPlace.datap
     
-    map.on('click',function(e) {
+    map.on('click', async (event) =>{ 
 
         console.log(placeHistoricData);
 
