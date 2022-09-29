@@ -141,7 +141,7 @@ function onMapClick(e) {
       var position = marker1.getLatLng();
       marker1.setLatLng(new L.LatLng(position.lat, position.lng),{draggable:'true'});
       map.panTo(new L.LatLng(position.lat, position.lng));
-      marker1.bindPopup("Fecha:"+placeHistoricData.fecha+",Hora:"+placeHistoricData.hora);
+      marker1.bindPopup("Fecha:"+placeHistoricDatap.fecha+",Hora:"+placeHistoricDatap.hora);
       lati=position.lat;
       long=position.lng;
       console.log(lati);
