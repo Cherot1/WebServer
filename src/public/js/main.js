@@ -137,40 +137,57 @@ button.addEventListener("click", async (event) =>{
 
 
 
-async function marcador(){
-
-   
-    map.on('mousemove',function(e) {
-        let position=e.latlng;
-        lati=position.lat
-        long=position.lng
-        marker1.setLatLng([lati,long])
-        map.addLayer(marker1);
-    });
-
-
-    map.on('click', async (event) =>{ 
-    const data = {
-
-        latp: lati,
-        longp: long
-        };
-        console.log(lati);
-    const res  = await fetch("/place", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-    });
-    
-    const historicPlace = await res.json();
-    var placeHistoricData = historicPlace.datap
-    
-    console.log(placeHistoricData);
-
-
-    });
-}
-
-let inte = setInterval(()=>{marcador()}, 3000);
+ histMarker = L.marker([11.027, -74.669], {icon: histPenguinMarker});
+ map.on('mousemove', async(e) => {
+     if(pickingMap){
+         histMarker = histMarker.setLatLng(e.latlng);
+         map.addLayer(histMarker);
+ 
+         const data = {
+             latp    : e.latlng.lat,
+             longp   : e.latlng.lng
+         };
+ 
+         const res  = await fetch("/place", {
+             method: "POST",
+             headers: {
+                 "Content-Type": "application/json",
+             },
+             body: JSON.stringify(data),
+         });
+ 
+         const historicPlace = await res.json();
+         placeHistoricData = historicPlace.datap
+         console.log(placeHistoricData.length);
+ 
+        try{
+             document.getElementById('RegisterDiv').remove();
+         } catch (err){
+ 
+         }
+ 
+         var div = document.createElement("ul");
+         div.setAttribute("id", "RegisterDiv");
+         div.append(document.createElement('br'))
+ 
+         document.getElementById('boxTitle').innerHTML = "El móvil estuvo en el punto seleccionado: "
+ 
+         if(placeHistoricData.length === 0){
+             document.getElementById('boxTitle').innerHTML = "El móvil NO ha estado en el punto seleccionado "
+         }
+ 
+         let cont = 0;
+         for (var i = 0; i < placeHistoricData.length; i++){
+             var item = document.createElement('li');
+ 
+             let date = new Date(placeHistoricData[i].fecha);
+             item.innerHTML = "El día " +date.toLocaleDateString('en-ZA')+ " a las " + placeHistoricData[i].hora;
+             div.append(item);
+ 
+             if(cont===20){
+                 break;
+             }
+         }
+         document.getElementById('register').append(div);
+     }
+ });
