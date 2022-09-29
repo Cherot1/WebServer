@@ -152,9 +152,9 @@ async function marcador(){
     const data = {
 
         latp: lati,
-        longp: long,
+        longp: long
         };
-
+        console.log(lati);
     const res  = await fetch("/place", {
         method: "POST",
         headers: {
