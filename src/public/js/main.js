@@ -146,7 +146,7 @@ async function marcador(){
         long=position.lng
         marker1.setLatLng([lati,long])
         map.addLayer(marker1);
-        hhh()
+        hhh();
         console.log(placeHistoricData);
 
     });
