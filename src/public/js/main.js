@@ -35,7 +35,7 @@ end_date.addEventListener('click', function (){
 
 // LEAFLET SETTINGS
 // build leaflet map with a specific template
-const map = L.map('map-template', {zoomControl: true}).setView([10.965633, -74.8215339], 14);const tileURL = 'https://tile.openstreetmap.de/{z}/{x}/{y}.png';
+const map = L.map('map-template', {zoomControl: true}).setView([10.965633, -74.8215339], 12);const tileURL = 'https://tile.openstreetmap.de/{z}/{x}/{y}.png';
 L.tileLayer(tileURL).addTo(map);
 
 /* CREATING MARKERS */
