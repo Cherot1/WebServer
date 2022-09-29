@@ -149,7 +149,7 @@ async function marcador(){
     });
 
 
-    
+    map.on('click', async (event) =>{ 
     const data = {
 
         latp: lati,
@@ -167,9 +167,7 @@ async function marcador(){
     const historicPlace = await res.json();
     var placeHistoricData = historicPlace.datap
     
-    map.on('click', async (event) =>{ 
-
-        console.log(placeHistoricData);
+    console.log(placeHistoricData);
 
 
     });
