@@ -40,14 +40,23 @@ udp.bind(udpPort,udpHost);
 
 
 app.get("/data", (req,res) =>{
-    cnx.pool.query("SELECT fecha, hora, latitud, longitud FROM gps_data ORDER BY ID DESC LIMIT 1", (err,rows) => {
+    if(data[0]===0){
+        cnx.pool.query("SELECT fecha, hora, latitud, longitud FROM gps_data ORDER BY ID DESC LIMIT 1", (err,rows) => {
             res.json({
-                "lat": rows[0].latitud,
-                "lon": rows[0].longitud,
-                "tm":  rows[0].hora,
-                "dt":  moment(rows[0].fecha).format("DD/MM/YYYY"),
+                "lat"   : rows[0].latitud,
+                "lon"   : rows[0].longitud,
+                "tm"    : rows[0].hora,
+                "dt"    : moment(rows[0].fecha).format("DD/MM/YYYY"),
             });
-    });
+        });
+    } else {
+        res.json({
+            "lat"   : data[0],
+            "lon"   : data[1],
+            "tm"    : data[2],
+            "dt"    : moment(data[3]).format("DD/MM/YYYY"),
+        })
+    }
 });
 
 app.use(express.json({limit: '1mb'}));

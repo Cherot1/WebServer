@@ -31,22 +31,18 @@
                 <i class='bx bx-menu' id="btn"></i>
             </a>
         </div>
-
+        <hr style="margin-top: 10px; width: 80%; height: 0.1mm">
         <ul class="nav_list">
             <li>
                 <div class="iocn-link">
-                    <a href="#">
                         <i class='bx bx-calendar'></i>
                         <span class="links_name" id="date"></span>
-                    </a>
                 </div>
             </li>
             <li>
                 <div class="iocn-link">
-                    <a href="#">
                         <i class='bx bx-time' ></i>
                         <span class="links_name" id="time"></span>
-                    </a>
                 </div>
                 <div></div>
                 <button id="button" onclick="centerMap()" style="border-radius: 20px">
@@ -55,9 +51,18 @@
             </li>
             <li>
                 <div class="iocn-link-rt">
+                    <a href="#" id="pickingMap">
+                        <i class='bx bxs-map-pin'></i>
+                        <span class="links_name">Recorridos por lugar</span>
+                    </a>
+                </div>
+
+            </li>
+            <li>
+                <div class="iocn-link-rt">
                     <a href="#" id="recorridos">
-                        <i class='bx bx-stats' ></i>
-                        <span class="links_name">Recorridos</span>
+                        <i class='bx bxs-watch'></i>
+                        <span class="links_name">Recorridos por fecha</span>
                     </a>
                 </div>
                 <div class="historic active">
@@ -103,10 +108,38 @@
         let sidebar = document.querySelector(".sidebar");
         let rec = document.querySelector("#recorridos");
         let historic = document.querySelector(".historic");
+        let pick = document.querySelector("#pickingMap");
+        let pickingMap = false;
+
 
         rec.onclick = function () {
             historic.classList.toggle("active");
+            if(!historic.classList.contains('active')){
+                document.getElementById('recorridos').style = 'color: #0e1842; background: #c9d1ff;';
+                document.getElementById('pickingMap').style = 'color: #c9d1ff; background: #1f2e6c;';
+                pickingMap = false;
+            }else{
+                document.getElementById('recorridos').style = 'color: #c9d1ff; background: #1f2e6c;';
+            }
+            console.log(pickingMap)
         }
+
+        pick.addEventListener('click',function (){
+            if(!historic.classList.contains('active')) {
+                historic.classList.toggle("active");
+                document.getElementById('recorridos').style = 'color: #c9d1ff; background: #1f2e6c;'
+            }
+            if(!pickingMap){
+                pickingMap = true
+                document.getElementById('pickingMap').style = 'color: #1f2e6c; background: #c9d1ff;'
+            } else {
+                document.getElementById('pickingMap').style = 'color: #c9d1ff; background: #1f2e6c;'
+                pickingMap = false;
+            }
+            console.log(pickingMap)
+        });
+
+
         btn.onclick = function() {
             sidebar.classList.toggle("active");
         }
