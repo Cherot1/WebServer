@@ -98,7 +98,7 @@ app.use(require('./routes/index'));
 app.use(express.static( path.join(__dirname, 'public' )));
 
 // starting the server
-const port = 8080;
+const port = 80;
 app.listen(port, () => {
     console.log("server on port: ",port)
 });
