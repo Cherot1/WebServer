@@ -68,7 +68,7 @@ let lat = 0;
 let lon = 0;
 let prelat = 0;
 let prelon = 0;
-var polylineHistPoints =[];
+var polylineHist;
 
 
 async function getData(){
@@ -105,7 +105,7 @@ function centerMap() {
 
 button = document.getElementById('historics');
 button.addEventListener("click", async (event) =>{
-    map.removeLayer(polylineHistPoints);
+    map.removeLayer(polylineHist);
     if (start_date.value === end_date.value){
         if (start_time.value+":00" > end_time.value+":00"){
             alert('Por favor, escoja una hora inicial menor a la hora final')
@@ -130,7 +130,7 @@ button.addEventListener("click", async (event) =>{
         origin = [parseFloat(gpsHistoricData[i-1].latitud),parseFloat(gpsHistoricData[i-1].longitud)];
         destin = [parseFloat(gpsHistoricData[i].latitud),parseFloat(gpsHistoricData[i].longitud)];
         polylineHistPoints = [origin,destin];
-        L.polyline(polylineHistPoints, { color: 'black', with: 2.0 }).addTo(map);
+        polylineHist=L.polyline(polylineHistPoints, { color: 'black', with: 2.0 }).addTo(map);
     }
  })
 
