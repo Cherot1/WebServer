@@ -133,8 +133,9 @@ button.addEventListener("click", async (event) =>{
         destin = [parseFloat(gpsHistoricData[i].latitud),parseFloat(gpsHistoricData[i].longitud)];
         var polylineHistPoints = [origin,destin];
         polylineHist=L.polyline(polylineHistPoints, { color: 'black', with: 2.0 }).addTo(map);
-        cont1=1;
+        
     }
+    cont1=1;
  })
 
 
