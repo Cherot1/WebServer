@@ -49,34 +49,36 @@
                     <i class='bx bx-target-lock'></i>
                 </button>
             </li>
-            <li>
+            <!--<li>
                 <div class="iocn-link-rt">
                     <a href="#" id="pickingMap">
-                        <i class='bx bxs-map-pin'></i>
-                        <span class="links_name">Recorridos por lugar</span>
+                        <i class='bx bx-stats'></i>
+                        <span class="links_name">Tu Cronología</span>
                     </a>
                 </div>
 
-            </li>
+            </li>-->
             <li>
                 <div class="iocn-link-rt">
                     <a href="#" id="recorridos">
-                        <i class='bx bxs-watch'></i>
-                        <span class="links_name">Recorridos por fecha</span>
+                        <i class='bx bx-stats'></i>
+                        <span class="links_name">Tu Cronología</span>
                     </a>
                 </div>
+
                 <div class="historic active">
                     <div class="moment">
                         <p style="margin-top: 5px">Escoja fecha y hora de incio</p>
                         <input
                                 id="start_date"
-                                type="date"
-                                onkeydown="return false">
+                                type="date">
+                                <!--onkeydown="return false"-->
                         <input
                                 id="start_time"
                                 type="time"
-                                onkeydown="return false"
                                 style="margin-top: 5px">
+                                <!--onkeydown="return false"-->
+
                     </div>
                     <div class="moment">
                         <p style="margin-top: 10px">Escoja fecha y hora de fin</p>
@@ -90,11 +92,9 @@
                                 onkeydown="return false"
                                 style="margin-top: 5px">
                     </div>
-                    <div class="boton">
-                        <button id="historics">
-                            <i class='bx bx-search-alt-2' ></i>
-                        </button>
-                    </div>
+                    <a href="#" id="historics">
+                        <i class='bx bxs-send'></i>
+                    </a>
                 </div>
             </li>
         </ul>
@@ -114,7 +114,7 @@
         let sidebar = document.querySelector(".sidebar");
         let rec = document.querySelector("#recorridos");
         let historic = document.querySelector(".historic");
-        let pick = document.querySelector("#pickingMap");
+        let pick = document.querySelector("#historics");
         let pickingMap = false;
 
 
@@ -122,46 +122,35 @@
             historic.classList.toggle("active");
             if(!historic.classList.contains('active')){
                 document.getElementById('recorridos').style = 'color: #0e1842; background: #c9d1ff;';
-                document.getElementById('pickingMap').style = 'color: #ffffff; background: #1f2e6c;';
-                document.getElementById('onScreeBox').style = 'display: none;'
-                pickingMap = false;
+
                 map.removeLayer(histMarker);
+                document.getElementById('boxTitle').innerHTML = "Por favor, haga click en algún lugar del mapa"
+
                 try{
                     document.getElementById('RegisterDiv').remove();
                 } catch (err){
                 }
-
             }else{
                 document.getElementById('recorridos').style = 'color: #ffffff; background: #1f2e6c;';
+                document.getElementById('onScreeBox').style = 'display: none;'
+                pickingMap = false;
             }
             console.log(pickingMap)
         }
 
         pick.addEventListener('click',function (){
-            if(!historic.classList.contains('active')) {
-                historic.classList.toggle("active");
-                document.getElementById('recorridos').style = 'color: #ffffff; background: #1f2e6c;'
+            //if(!pickingMap){
+            document.getElementById('onScreeBox').style = 'display: block;'
+            pickingMap = true
+            document.getElementById('pickingMap').style = 'color: #ffffff; background: #1f2e6c;'
+            map.removeLayer(histMarker);
+            try{
+                document.getElementById('RegisterDiv').remove();
+            } catch (err){
             }
-            if(!pickingMap){
-                pickingMap = true
-                document.getElementById('onScreeBox').style = 'display: block;'
-                document.getElementById('pickingMap').style = 'color: #1f2e6c; background: #c9d1ff;';
-                document.getElementById('boxTitle').innerHTML = "Por favor, haga click en algún lugar del mapa"
-
-            } else {
-                document.getElementById('onScreeBox').style = 'display: none;'
-                document.getElementById('pickingMap').style = 'color: #ffffff; background: #1f2e6c;'
-                pickingMap = false;
-                map.removeLayer(histMarker);
-                try{
-                    document.getElementById('RegisterDiv').remove();
-                } catch (err){
-
-                }
-            }
+            //}
             console.log(pickingMap)
         });
-
 
         btn.onclick = function() {
             sidebar.classList.toggle("active");

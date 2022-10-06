@@ -104,11 +104,15 @@ function centerMap() {
 
 button = document.getElementById('historics');
 button.addEventListener("click", async (event) =>{
+    if (start_date.value === end_date.value){
+        if (start_time.value+":00" > end_time.value+":00"){
+            alert('Por favor, escoja una hora inicial menor a la hora final')
+        }
+    }
+
     const data = {
-        sdate: start_date.value,
-        stime: start_time.value,
-        edate: end_date.value,
-        etime: end_time.value};
+        sdate_time: start_date.value + " " + start_time.value,
+        edate_time: end_date.value + " " + end_time.value};
 
     const res  = await fetch("/moment", {
         method: "POST",
@@ -120,8 +124,6 @@ button.addEventListener("click", async (event) =>{
     const historicData = await res.json();
     gpsHistoricData = historicData.data
     
-    var arr1 = [];
-    var arr2 = [];
     for (var i = 1; i < gpsHistoricData.length; i++){
         origin = [parseFloat(gpsHistoricData[i-1].latitud),parseFloat(gpsHistoricData[i-1].longitud)];
         destin = [parseFloat(gpsHistoricData[i].latitud),parseFloat(gpsHistoricData[i].longitud)];
@@ -130,8 +132,9 @@ button.addEventListener("click", async (event) =>{
     }
  })
 
+
 histMarker = L.marker([11.027, -74.669], {icon: histPenguinMarker});
-map.on('click', async(e) => {
+map.on('mousemove', async(e) => {
     if(pickingMap){
         histMarker = histMarker.setLatLng(e.latlng);
         map.addLayer(histMarker);
@@ -150,8 +153,7 @@ map.on('click', async(e) => {
         });
 
         const historicPlace = await res.json();
-        placeHistoricData = historicPlace.datap
-        console.log(placeHistoricData.length);
+        placeHistoricData = historicPlace.datap;
 
        try{
             document.getElementById('RegisterDiv').remove();
@@ -173,13 +175,11 @@ map.on('click', async(e) => {
         for (var i = 0; i < placeHistoricData.length; i++){
             var item = document.createElement('li');
 
-            let date = new Date(placeHistoricData[i].fecha);
-            item.innerHTML = "El día " +date.toLocaleDateString('en-ZA')+ " a las " + placeHistoricData[i].hora;
+            let date = new Date(placeHistoricData[i].fecha_hora);
+            item.innerHTML = "El día " +date.toLocaleDateString('en-ZA')+ " a las " + ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2)+ ":" + ("0" + date.getSeconds()).slice(-2);
             div.append(item);
             cont++;
-            if(cont===20){
-                break;
-            }
+
         }
         document.getElementById('register').append(div);
     }
