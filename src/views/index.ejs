@@ -123,7 +123,7 @@
             if(!historic.classList.contains('active')){
                 document.getElementById('recorridos').style = 'color: #0e1842; background: #c9d1ff;';
 
-                map.removeLayer(histMarker);
+                //map.removeLayer(histMarker);
                 document.getElementById('boxTitle').innerHTML = "Por favor, haga click en algún lugar del mapa"
 
                 try{
@@ -142,7 +142,7 @@
             //if(!pickingMap){
             document.getElementById('onScreeBox').style = 'display: block;'
             pickingMap = true
-            document.getElementById('pickingMap').style = 'color: #ffffff; background: #1f2e6c;'
+            //document.getElementById('pickingMap').style = 'color: #ffffff; background: #1f2e6c;'
             map.removeLayer(histMarker);
             try{
                 document.getElementById('RegisterDiv').remove();

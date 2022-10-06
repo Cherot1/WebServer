@@ -68,6 +68,7 @@ let lat = 0;
 let lon = 0;
 let prelat = 0;
 let prelon = 0;
+var active_polyline = L.featureGroup().addTo(map);
 
 
 async function getData(){
@@ -102,6 +103,7 @@ function centerMap() {
     map.setView([lat,lon],15);
 }
 
+
 button = document.getElementById('historics');
 button.addEventListener("click", async (event) =>{
     if (start_date.value === end_date.value){
@@ -123,25 +125,29 @@ button.addEventListener("click", async (event) =>{
     });
     const historicData = await res.json();
     gpsHistoricData = historicData.data
-    
+
+    active_polyline.clearLayers();
     for (var i = 1; i < gpsHistoricData.length; i++){
         origin = [parseFloat(gpsHistoricData[i-1].latitud),parseFloat(gpsHistoricData[i-1].longitud)];
         destin = [parseFloat(gpsHistoricData[i].latitud),parseFloat(gpsHistoricData[i].longitud)];
         var polylineHistPoints = [origin,destin];
-        L.polyline(polylineHistPoints, { color: 'black', with: 2.0 }).addTo(map);
+        L.polyline(polylineHistPoints, { color: 'black', with: 2.0 }).addTo(active_polyline);
     }
- })
+ });
 
 
+var typeMouseMap = 'mousemove';
 histMarker = L.marker([11.027, -74.669], {icon: histPenguinMarker});
-map.on('mousemove', async(e) => {
+map.on(typeMouseMap, async(e) => {
     if(pickingMap){
         histMarker = histMarker.setLatLng(e.latlng);
         map.addLayer(histMarker);
 
         const data = {
             latp    : e.latlng.lat,
-            longp   : e.latlng.lng
+            longp   : e.latlng.lng,
+            sdate_time: start_date.value + " " + start_time.value,
+            edate_time: end_date.value + " " + end_time.value,
         };
 
         const res  = await fetch("/place", {
@@ -183,4 +189,15 @@ map.on('mousemove', async(e) => {
         }
         document.getElementById('register').append(div);
     }
+
+
 });
+
+map.on('click', function (){
+    if (typeMouseMap ==='mousemove'){
+        typeMouseMap = 'click';
+    } else {
+        typeMouseMap = 'mousemove';
+    }
+});
+

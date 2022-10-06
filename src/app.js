@@ -66,10 +66,9 @@ app.get("/data", (req,res) =>{
 
 app.use(express.json({limit: '1mb'}));
 app.post("/moment", (req,res) =>{
-    let btwDateQuery =  `SELECT latitud, longitud FROM gps_data WHERE (fecha_hora BETWEEN '${req.body.sdate_time}' AND '${req.body.edate_time}')`;
+    let btwDateQuery =  `SELECT latitud, longitud, fecha_hora FROM gps_data WHERE (fecha_hora BETWEEN '${req.body.sdate_time}' AND '${req.body.edate_time}')`;
 
     cnx.pool.query(btwDateQuery, (err,rows) => {
-        console.log(rows)
         if (err) throw err;
         res.json({
             "data" : rows
@@ -79,9 +78,9 @@ app.post("/moment", (req,res) =>{
 
 
 app.post("/place", (req,res) =>{
-    let querym=     "SELECT DISTINCT fecha_hora FROM gps_data WHERE latitud BETWEEN "
+    let querym=     "SELECT fecha_hora FROM gps_data WHERE (fecha_hora BETWEEN '"+req.body.sdate_time+"' AND '"+req.body.edate_time+"') AND (latitud BETWEEN "
                     + "('"+req.body.latp+"'*0.99997) and ('"+req.body.latp+"'*1.00005) and longitud BETWEEN "
-                    + "('"+req.body.longp+"'*1.00005) and ('"+req.body.longp+"'*0.99997)"
+                    + "('"+req.body.longp+"'*1.00005) and ('"+req.body.longp+"'*0.99997))";
 
     cnx.pool.query(querym, (err,rows) => {
         if (err) throw err;
