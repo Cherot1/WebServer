@@ -102,10 +102,12 @@ setInterval(()=>{getData()}, 3000);
 function centerMap() {
     map.setView([lat,lon],15);
 }
-
+var cont1=0;
 button = document.getElementById('historics');
 button.addEventListener("click", async (event) =>{
-    map.removeLayer(polylineHist);
+    if(cont1==1){
+        map.removeLayer(polylineHist);
+    }
     if (start_date.value === end_date.value){
         if (start_time.value+":00" > end_time.value+":00"){
             alert('Por favor, escoja una hora inicial menor a la hora final')
@@ -131,7 +133,7 @@ button.addEventListener("click", async (event) =>{
         destin = [parseFloat(gpsHistoricData[i].latitud),parseFloat(gpsHistoricData[i].longitud)];
         var polylineHistPoints = [origin,destin];
         polylineHist=L.polyline(polylineHistPoints, { color: 'black', with: 2.0 }).addTo(map);
-        
+        cont1=1;
     }
  })
 
