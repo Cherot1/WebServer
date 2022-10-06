@@ -104,6 +104,7 @@ function centerMap() {
 
 button = document.getElementById('historics');
 button.addEventListener("click", async (event) =>{
+    polylineHistPoints.remove(map)
     if (start_date.value === end_date.value){
         if (start_time.value+":00" > end_time.value+":00"){
             alert('Por favor, escoja una hora inicial menor a la hora final')
