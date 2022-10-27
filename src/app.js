@@ -46,36 +46,27 @@ udp.on('message', (msg) =>{
     }
 
 
-
 });
 udp.bind(udpPort,udpHost);
 
-/*var tablesDB = ['','']
+var tablesDB = ['','']
 cnx.pool.query("SHOW TABLES", (err,rows) => {
     if (err) throw err;
     tablesDB[0] = rows[rows.length-1].Tables_in_gpsdata;
     tablesDB[1] = rows[rows.length-2].Tables_in_gpsdata;
-})*/
+})
 
 app.get("/data", (req,res) =>{
-    if(data[0]===0 ){
-        cnx.pool.query("SELECT latitud, longitud, fecha_hora FROM gps_data ORDER BY ID DESC LIMIT 1", (err,rows) => {
-            res.json({
-                "lat"   : rows[0].latitud,
-                "lon"   : rows[0].longitud,
-                "tm"    : moment(rows[0].fecha_hora).format('HH:mm:ss'),
-                "dt"    : moment(rows[0].fecha_hora).format("DD/MM/YYYY"),
-            });
-        });
 
-    } else if(data[0] !== 'null') {
+    cnx.pool.query("SELECT latitud, longitud, fecha_hora FROM "+ tablesDB[parseInt(req.body.car)] +" ORDER BY ID DESC LIMIT 1", (err,rows) => {
         res.json({
-            "lat"   : data[0],
-            "lon"   : data[1],
-            "tm"    : data[2],
-            "dt"    : moment(data[3]).format("DD/MM/YYYY"),
-        })
-    }
+            "lat"   : rows[0].latitud,
+            "lon"   : rows[0].longitud,
+            "tm"    : moment(rows[0].fecha_hora).format('HH:mm:ss'),
+            "dt"    : moment(rows[0].fecha_hora).format("DD/MM/YYYY"),
+        });
+    });
+
 });
 
 app.use(express.json({limit: '1mb'}));

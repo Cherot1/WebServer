@@ -72,7 +72,14 @@ var active_polyline = L.featureGroup().addTo(map);
 
 
 async function getData(){
-    const response = await fetch("./data", {});
+
+    const response = await fetch("./data", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({car: carSelection}),
+    });
     let responseJson = await response.json();
     //console.log("respuesta del servidor", responseJson)
     document.getElementById("date").innerHTML = await `${responseJson.dt}`;
