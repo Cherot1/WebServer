@@ -126,7 +126,6 @@ button.addEventListener("click", async (event) =>{
     };
 
     const res  = await fetch("/moment", {
-        method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
