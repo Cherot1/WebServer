@@ -50,12 +50,12 @@ udp.on('message', (msg) =>{
 });
 udp.bind(udpPort,udpHost);
 
-/*var tablesDB = ['','']
+var tablesDB = ['','']
 cnx.pool.query("SHOW TABLES", (err,rows) => {
     if (err) throw err;
     tablesDB[0] = rows[rows.length-1].Tables_in_gpsdata;
     tablesDB[1] = rows[rows.length-2].Tables_in_gpsdata;
-})*/
+})
 
 app.get("/data", (req,res) =>{
     if(data[0]===0 ){
@@ -89,7 +89,6 @@ app.post("/moment", (req,res) =>{
         })
     });
 });+
-
 
 
 app.post("/place", (req,res) =>{
