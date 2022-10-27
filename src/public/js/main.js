@@ -72,7 +72,6 @@ var active_polyline = L.featureGroup().addTo(map);
 
 
 async function getData(){
-    await sentCarNumber();
     const response = await fetch("./data", {});
     let responseJson = await response.json();
     //console.log("respuesta del servidor", responseJson)
@@ -119,7 +118,13 @@ button.addEventListener("click", async (event) =>{
         car: carSelection,
     };
 
-    const res  = await fetch("/moment", {});
+    const res  = await fetch("/moment", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+    });
     const historicData = await res.json();
     gpsHistoricData = historicData.data
 
@@ -148,18 +153,6 @@ document.body.onkeyup = function(e) {
         }
         console.log(typeMouseMap)
     }
-}
-
-async function sentCarNumber(){
-    const res = await fetch("/placeCar", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            car: carSelection
-        }),
-    });
 }
 
 histMarker = L.marker([11.027, -74.669], {icon: histPenguinMarker});
