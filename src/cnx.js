@@ -13,9 +13,23 @@ const connect = () =>{
     });
 }
 
-const addGpsData = (latitude, longitude, date_time) => {
-    let query = "INSERT INTO gps_data (latitud,longitud, fecha_hora)"
+const addGpsData = (latitude, longitude, date_time, user) => {
+    let query = "INSERT INTO  user_"+user+" (latitud,longitud, fecha_hora)"
         +"VALUES ('"+latitude+"','"+longitude+"','"+date_time+"')";
+    pool.query(query, function (err) {
+        if(err) throw err;
+    })
+}
+
+const checkNewUsers = (user) => {
+    let query = `INSERT IGNORE INTO UsersTable (User) VALUES ('${user}')`
+    pool.query(query, function (err) {
+        if(err) throw err;
+    })
+}
+
+const createTableIfNotExist = (user) => {
+    let query = `CREATE TABLE IF NOT EXISTS user_`+user+` (id INT AUTO_INCREMENT PRIMARY KEY ,latitud DOUBLE, longitud DOUBLE,fecha_hora DATETIME)`;
     pool.query(query, function (err) {
         if(err) throw err;
     })
@@ -24,5 +38,7 @@ const addGpsData = (latitude, longitude, date_time) => {
 module.exports = {
     pool,
     connect,
-    addGpsData
+    addGpsData,
+    checkNewUsers,
+    createTableIfNotExist
 }

@@ -114,7 +114,9 @@ button.addEventListener("click", async (event) =>{
 
     const data = {
         sdate_time: start_date.value + " " + start_time.value,
-        edate_time: end_date.value + " " + end_time.value};
+        edate_time: end_date.value + " " + end_time.value,
+        car: carSelection,
+    };
 
     const res  = await fetch("/moment", {
         method: "POST",
@@ -136,68 +138,80 @@ button.addEventListener("click", async (event) =>{
  });
 
 
-var typeMouseMap = 'mousemove';
+let typeMouseMap = 'mousemove';
+
+document.body.onkeyup = function(e) {
+    if (e.key === " " ||
+        e.code === "Space" ||
+        e.keyCode === 32
+    ) {
+        if (typeMouseMap === 'mousemove'){
+            typeMouseMap = 'click'
+        } else {
+            map.off('click', )
+            typeMouseMap = 'mousemove';
+        }
+        console.log(typeMouseMap)
+    }
+}
+
 histMarker = L.marker([11.027, -74.669], {icon: histPenguinMarker});
-map.on(typeMouseMap, async(e) => {
-    if(pickingMap){
-        histMarker = histMarker.setLatLng(e.latlng);
-        map.addLayer(histMarker);
+ async function mapType(e) {
+     console.log(typeMouseMap)
+     if (pickingMap) {
+         histMarker = histMarker.setLatLng(e.latlng);
+         map.addLayer(histMarker);
 
-        const data = {
-            latp    : e.latlng.lat,
-            longp   : e.latlng.lng,
-            sdate_time: start_date.value + " " + start_time.value,
-            edate_time: end_date.value + " " + end_time.value,
-        };
+         const data = {
+             latp: e.latlng.lat,
+             longp: e.latlng.lng,
+             sdate_time: start_date.value + " " + start_time.value,
+             edate_time: end_date.value + " " + end_time.value,
+             car: carSelection,
+         };
 
-        const res  = await fetch("/place", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-        });
+         const res = await fetch("/place", {
+             method: "POST",
+             headers: {
+                 "Content-Type": "application/json",
+             },
+             body: JSON.stringify(data),
+         });
 
-        const historicPlace = await res.json();
-        placeHistoricData = historicPlace.datap;
+         const historicPlace = await res.json();
+         placeHistoricData = historicPlace.datap;
 
-       try{
-            document.getElementById('RegisterDiv').remove();
-        } catch (err){
+         try {
+             document.getElementById('RegisterDiv').remove();
+         } catch (err) {
 
-        }
+         }
 
-        var div = document.createElement("ul");
-        div.setAttribute("id", "RegisterDiv");
-        div.append(document.createElement('br'))
+         var div = document.createElement("ul");
+         div.setAttribute("id", "RegisterDiv");
+         div.append(document.createElement('br'))
 
-        document.getElementById('boxTitle').innerHTML = "El móvil estuvo en el punto seleccionado: "
+         document.getElementById('boxTitle').innerHTML = "El móvil estuvo en el punto seleccionado: "
 
-        if(placeHistoricData.length === 0){
-            document.getElementById('boxTitle').innerHTML = "El móvil NO ha estado en el punto seleccionado "
-        }
+         if (placeHistoricData.length === 0) {
+             document.getElementById('boxTitle').innerHTML = "El móvil NO ha estado en el punto seleccionado "
+         }
 
-        let cont = 0;
-        for (var i = 0; i < placeHistoricData.length; i++){
-            var item = document.createElement('li');
+         let cont = 0;
+         for (var i = 0; i < placeHistoricData.length; i++) {
+             var item = document.createElement('li');
 
-            let date = new Date(placeHistoricData[i].fecha_hora);
-            item.innerHTML = "El día " +date.toLocaleDateString('en-ZA')+ " a las " + ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2)+ ":" + ("0" + date.getSeconds()).slice(-2);
-            div.append(item);
-            cont++;
+             let date = new Date(placeHistoricData[i].fecha_hora);
+             item.innerHTML = "El día " + date.toLocaleDateString('en-ZA') + " a las " + ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2) + ":" + ("0" + date.getSeconds()).slice(-2);
+             div.append(item);
+             cont++;
+             if(cont===20){
+                 break;
+             }d
 
-        }
-        document.getElementById('register').append(div);
-    }
+         }
+         document.getElementById('register').append(div);
+     }
+ }
 
-
-});
-
-map.on('click', function (){
-    if (typeMouseMap ==='mousemove'){
-        typeMouseMap = 'click';
-    } else {
-        typeMouseMap = 'mousemove';
-    }
-});
 

@@ -34,6 +34,15 @@
         <hr style="margin-top: 10px; width: 80%; height: 0.1mm">
         <ul class="nav_list">
             <li>
+                <div class="dropdown">
+                    <div class="cars">
+                        <button id="car1">Carro1</button>
+                        <button id="car2">Carro2</button>
+                    </div>
+                </div>
+            </li>
+
+            <li>
                 <div class="iocn-link">
                         <i class='bx bx-calendar'></i>
                         <span class="links_name" id="date"></span>
@@ -62,7 +71,7 @@
                 <div class="iocn-link-rt">
                     <a href="#" id="recorridos">
                         <i class='bx bx-stats'></i>
-                        <span class="links_name">Tu Cronología</span>
+                        <span class="links_name">Historicos</span>
                     </a>
                 </div>
 
@@ -150,11 +159,27 @@
             }
             //}
             console.log(pickingMap)
+            map.on(typeMouseMap, mapType());
         });
 
         btn.onclick = function() {
             sidebar.classList.toggle("active");
         }
+
+        let car1 = document.querySelector("#car1");
+        let car2 = document.querySelector("#car2");
+        var carSelection = 0;
+        document.getElementById('car1').style = 'background-color: #1f2e6c; color: white'
+        car2.addEventListener('click', function (){
+            document.getElementById('car2').style = 'background-color: #1f2e6c; color: white'
+            document.getElementById('car1').style = 'background-color: white; color: #1f2e6c'
+            carSelection = 1;
+        })
+        car1.addEventListener('click', function (){
+            document.getElementById('car1').style = 'background-color: #1f2e6c; color: white'
+            document.getElementById('car2').style = 'background-color: white; color: #1f2e6c'
+            carSelection = 0;
+        })
 
 
     </script>
