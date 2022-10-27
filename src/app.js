@@ -74,14 +74,14 @@ app.get("/data", (req,res) =>{
             });
         });
 
-    } else if(data[0] !== 'null') {
+    /*} else if(data[0] !== 'null') {
         res.json({
             "lat"   : data[0],
             "lon"   : data[1],
             "tm"    : data[2],
             "dt"    : moment(data[3]).format("DD/MM/YYYY"),
         })
-    }
+    }*/
 });
 
 app.post("/moment", (req,res) =>{
@@ -93,7 +93,7 @@ app.post("/moment", (req,res) =>{
             "data" : rows
         })
     });
-});+
+});
 
 
 
