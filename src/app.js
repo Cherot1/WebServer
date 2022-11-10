@@ -84,7 +84,6 @@ app.get("/data", (req,res) =>{
 
 app.use(express.json({limit: '2mb'}));
 app.post("/moment", (req,res) =>{
-    console.log(req.body)
     console.log("SELECT latitud, longitud, fecha_hora FROM user_"+ cowID[parseInt(req.body.cow)] +" WHERE fecha_hora BETWEEN '"+req.body.sdate_time+"' AND '"+req.body.edate_time+"'")
     let btwDateQuery =  `SELECT latitud, longitud, fecha_hora FROM user_`+ cowID[parseInt(req.body.cow)] +` WHERE fecha_hora BETWEEN '${req.body.sdate_time}' AND '${req.body.edate_time}'`;
 
