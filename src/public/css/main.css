@@ -24,16 +24,13 @@ body {
     top: 0;
     left: 0;
     height: 100%;
-    width: 70px;
+    width: 240px;
     padding-top: 10px;
-    background: #0e1842;
+    background: #054b60;
     overflow-y: auto;
     transition: all 0.4s ease;
 }
 
-.sidebar.active{
-    width: 240px;
-}
 
 .sidebar .logo_details .logo{
     color: #F2EFE9;
@@ -51,92 +48,101 @@ body {
 }
 
 .logo_details .logo img{
-    margin-top: 10px;
-    margin-left: 10px;
+    margin-top: 15px;
+    margin-left: 15px;
 }
 
 .logo_details .logo .logo_name{
-    font-size:  20px;
+    font-size:  24px;
     padding: 10px 10px 0;
     font-weight: 700;
 }
 
-.sidebar #btn{
-    position: absolute;
-    color: #F2EFE9;
-    top: 6px;
-    left: 55%;
-    font-size: 28px;
-    height: 50px;
-    width: 50px;
-    line-height: 50px;
-    transform: translateX(-50%);
-    transition: all 0.4s ease;
-}
-
-.sidebar.active #btn{
-    left: 88%
-}
-
 .sidebar .nav_list {
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 .sidebar.active  .nav_list li{
-    position: relative;
     list-style: none;
     transition: all 0.4s ease;
 }
 
-.sidebar.active .nav_list li .dropdown {
+.sidebar.active .nav_list li .cowList{
+    padding: 4px 6px;
+}
+
+.sidebar.active .nav_list li .cowList #cow1{
+    background-color: #04607a;
+    border-radius: 15px;
     display: flex;
-    margin-bottom: 40px;
-}
-
-.sidebar.active .nav_list li .dropdown .cars{
-    width: 220px;
-    margin: auto;
-    display: inline;
-    text-align: center;
-}
-
-.sidebar.active .nav_list li .dropdown .cars button{
-    width: 70px;
-    height: 40px;
-    margin: 0 10px;
-    display: inline;
-    border-radius: 20px;
-    font-size: 14px;
-}
-
-.sidebar.active .nav_list li .date_content {
-    margin-left: 50%;
-    display: flex;
-    border-radius: 12px;
-    width: 200px;
-    background: #F2EFE9;
-}
-
-
-.sidebar .nav_list li .iocn-link{
-    color: #ffffff;
-    display: flex;
+    padding: 10px 6px;
+    height: 60%;
+    margin: 10px 6px;
     align-items: center;
-    text-decoration: none;
-    transition: all 0.4s ease;
-    padding-left: 5px;
-    border-radius: 12px;
 }
 
-.sidebar .nav_list li button{
-    height: 50px;
-    border: none;
+.cowList #cow1 img{
+    width: 30%;
+    height: 30%;
+    background-color: #e1d0d0;
+    border-radius: 10px;
+    margin: 10px;
     cursor: pointer;
-    width: 50px;
-    margin-top: 10px;
-    margin-left: 6px;
-    transition: all 0.4s ease;
 }
+
+.cowList #cow1 .data{
+    position: relative;
+    right: 0;
+    color: white;
+}
+
+
+.cowList #cow1 .data .data_text{
+    color: white;
+}
+
+.cowList #cow1 .data .data_text a{
+    color: #e8cfce;
+    font-weight: bold;
+}
+
+
+.sidebar.active .nav_list li .cowList #cow2{
+    background-color: #04607a;
+    border-radius: 15px;
+    display: flex;
+    padding: 10px 6px;
+    height: 60%;
+    margin: 10px 6px;
+    align-items: center;
+}
+
+.cowList #cow2 img{
+    width: 30%;
+    height: 30%;
+    background-color: #e1d0d0;
+    border-radius: 10px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.cowList #cow2 .data{
+    position: relative;
+    right: 0;
+    color: white;
+}
+
+
+.cowList #cow2 .data .data_text{
+    color: white;
+}
+
+.cowList #cow2 .data .data_text a{
+    color: #e8cfce;
+    font-weight: bold;
+}
+
+
 
 .sidebar.active .nav_list li button {
     margin-left: 35%;
@@ -144,20 +150,14 @@ body {
 
 .sidebar .nav_list li .iocn-link-rt a{
     margin-top: 30px;
-    color: #ffffff;
-    background-color: #1f2e6c;
+    color: #111111;
+    background-color: #d79e9d;
     display: flex;
     align-items: center;
     text-decoration: none;
     transition: all 0.4s ease;
     padding-left: 5px;
     border-radius: 18px;
-}
-
-.sidebar .nav_list li a:hover{
-    color: #0e1842;
-    background: #a5b5ff;
-    width: 240px;
 }
 
 .sidebar .nav_list li i{
@@ -189,11 +189,10 @@ body {
 }
 
 .sidebar.active .historic{
-    background: #1f2e6c;
+    background: #046079;
     border-radius: 12px;
-    margin: 0 15px 20px;
+    margin: 0 10px 20px;
     padding: 2px 20px;
-    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.8);
     transition: all 0.4s ease;
     opacity: 1;
 
@@ -220,13 +219,12 @@ body {
 }
 
 .sidebar.active .historic .moment input{
-    margin-left: 15%;
     position: relative;
     font-size: 13px;
     text-align: center;
     border-radius: 5px;
     background: #c9d1ff;
-    width: 120px;
+    width: 180px;
     height: 30px;
     transition: all 0.4s ease;
     opacity: 1;
@@ -238,14 +236,14 @@ body {
 }
 
 .sidebar .historic #historics{
+    position: relative;
     color: white;
     margin-left: 50px;
     transition: all 0.3s ease;
 }
 
 .sidebar .historic #historics:hover{
-    color: #3a51b7;
-    background: #1f2e6c;
+    color: #054b60;
 }
 
 

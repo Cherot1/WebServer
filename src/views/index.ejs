@@ -23,50 +23,48 @@
     <div class="sidebar active">
         <div class="logo_details">
             <div class="logo">
-                <img src="logo.png" alt="logo" style="width: 50px;height: 50px">
-                <div class="logo_name">Penguin<br>Tracker</div>
+                <img src="icon.png" alt="logo" style="width: 50px;height: 50px">
+                <div class="logo_name">COW TRACKER</div>
             </div>
-
-            <a href="#">
-                <i class='bx bx-menu' id="btn"></i>
-            </a>
         </div>
+
         <hr style="margin-top: 10px; width: 80%; height: 0.1mm">
         <ul class="nav_list">
             <li>
-                <div class="dropdown">
-                    <div class="cars">
-                        <button id="car1">Carro1</button>
-                        <button id="car2">Carro2</button>
+                <div class="cowList">
+                    <div id="cow1">
+                        <img src="cowMarkerYellow_1.png" alt="vaca#1" id="imgCow1">
+                        <div class="data">
+                            <div class="data_text">
+                                <span id="idCow1"></span><br>
+                                <span id="statusCow1" style="font-style: italic; color: darkgray">offline</span><br>
+                                <label>
+                                    <input type="checkbox" id="histCow1"> Historial
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="cow2">
+                        <img src="cowMarkerRed_1.png" alt="vaca#2" id="imgCow2">
+                        <div class="data">
+                            <div class="data_text">
+                                <span id="idCow2"></span><br>
+                                <span id="statusCow2" style="font-style: italic; color: darkgray">offline</span><br>
+                                <label>
+                                    <input type="checkbox" id="histCow2"> Historial
+                                </label>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </li>
 
             <li>
-                <div class="iocn-link">
-                        <i class='bx bx-calendar'></i>
-                        <span class="links_name" id="date"></span>
-                </div>
-            </li>
-            <li>
-                <div class="iocn-link">
-                        <i class='bx bx-time' ></i>
-                        <span class="links_name" id="time"></span>
-                </div>
                 <div></div>
                 <button id="button" onclick="centerMap()" style="border-radius: 20px">
                     <i class='bx bx-target-lock'></i>
                 </button>
             </li>
-            <!--<li>
-                <div class="iocn-link-rt">
-                    <a href="#" id="pickingMap">
-                        <i class='bx bx-stats'></i>
-                        <span class="links_name">Tu Cronología</span>
-                    </a>
-                </div>
-
-            </li>-->
             <li>
                 <div class="iocn-link-rt">
                     <a href="#" id="recorridos">
@@ -80,29 +78,19 @@
                         <p style="margin-top: 5px">Escoja fecha y hora de incio</p>
                         <input
                                 id="start_date"
-                                type="date">
-                                <!--onkeydown="return false"-->
-                        <input
-                                id="start_time"
-                                type="time"
-                                style="margin-top: 5px">
-                                <!--onkeydown="return false"-->
+                                type="datetime-local">
+
 
                     </div>
                     <div class="moment">
                         <p style="margin-top: 10px">Escoja fecha y hora de fin</p>
                         <input
                                 id="end_date"
-                                type="date"
-                                onkeydown="return false">
-                        <input
-                                id="end_time"
-                                type="time"
-                                onkeydown="return false"
-                                style="margin-top: 5px">
+                                type="datetime-local">
+
                     </div>
                     <a href="#" id="historics">
-                        <i class='bx bxs-send'></i>
+                        <i class='bx bx-search-alt' ></i>
                     </a>
                 </div>
             </li>
@@ -140,14 +128,14 @@
                 } catch (err){
                 }
             }else{
-                document.getElementById('recorridos').style = 'color: #ffffff; background: #1f2e6c;';
+                document.getElementById('recorridos').style = 'color: black; background: #d79e9d;';
                 document.getElementById('onScreeBox').style = 'display: none;'
                 pickingMap = false;
             }
             console.log(pickingMap)
         }
 
-        pick.addEventListener('click',function (){
+        /*pick.addEventListener('click',function (){
             //if(!pickingMap){
             document.getElementById('onScreeBox').style = 'display: block;'
             pickingMap = true
@@ -160,27 +148,14 @@
             //}
             console.log(pickingMap)
             map.on(typeMouseMap, mapType());
-        });
+        });*/
 
-        btn.onclick = function() {
-            sidebar.classList.toggle("active");
+        if(document.getElementById("statusCow1").innerHTML === 'offline'){
+            document.getElementById("histCow1").disabled = true;
         }
-
-        let car1 = document.querySelector("#car1");
-        let car2 = document.querySelector("#car2");
-        var carSelection = 0;
-        document.getElementById('car1').style = 'background-color: #1f2e6c; color: white'
-        car2.addEventListener('click', function (){
-            document.getElementById('car1').style = 'background-color: #1f2e6c; color: white'
-            document.getElementById('car2').style = 'background-color: white; color: #1f2e6c'
-            carSelection = 1;
-        })
-        car1.addEventListener('click', function (){
-            document.getElementById('car2').style = 'background-color: #1f2e6c; color: white'
-            document.getElementById('car1').style = 'background-color: white; color: #1f2e6c'
-            carSelection = 0;
-        })
-
+        if(document.getElementById("statusCow2").innerHTML === 'offline'){
+            document.getElementById("histCow2").disabled = true;
+        }
 
     </script>
 
