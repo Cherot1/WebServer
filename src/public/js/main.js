@@ -264,7 +264,7 @@ document.body.onkeyup = function(e) {
 }
 
 histMarker = L.marker([11.027, -74.669], {icon: histPenguinMarker});
- async function mapType(e) {
+ /*async function mapType(e) {
      console.log(typeMouseMap)
      if (pickingMap) {
          histMarker = histMarker.setLatLng(e.latlng);
@@ -324,3 +324,4 @@ histMarker = L.marker([11.027, -74.669], {icon: histPenguinMarker});
  }
 
 
+*/
