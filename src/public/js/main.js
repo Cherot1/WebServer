@@ -175,12 +175,6 @@ async function getData(){
         } catch (e) {
             console.log(e)
         }
-
-        /*polylinePoints = [[prelat, prelon], [lat, lon]]
-
-        if (prelat !== 0){
-            polyline = L.polyline(polylinePoints).addTo(map)
-        }*/
     }
     prelat = lat;
     prelon = lon;
@@ -252,7 +246,6 @@ button.addEventListener("click", async (event) =>{
 
 
 let typeMouseMap = 'mousemove';
-
 document.body.onkeyup = function(e) {
     if (e.key === " " ||
         e.code === "Space" ||
@@ -270,7 +263,7 @@ document.body.onkeyup = function(e) {
 
 histMarker = L.marker([11.027, -74.669], {icon: histPenguinMarker});
  async function mapType(e) {
-     console.log(typeMouseMap)
+     console.log('mousemove')
      if (pickingMap) {
          histMarker = histMarker.setLatLng(e.latlng);
          map.addLayer(histMarker);
