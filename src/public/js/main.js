@@ -122,10 +122,10 @@ async function getData(){
     lon = parseFloat(responseJson.lon);
 
     if(document.getElementById("statusCow1").innerHTML === 'offline'){
-        document.getElementById("histCow1").disabled = false;
+        document.getElementById("histCow1").disabled = true;
     }
     if(document.getElementById("statusCow2").innerHTML === 'offline'){
-        document.getElementById("histCow2").disabled = false;
+        document.getElementById("histCow2").disabled = true;
     }
 
     let x;
@@ -136,10 +136,10 @@ async function getData(){
                 markerR = new L.marker([parseFloat(responseJson.lat), parseFloat(responseJson.lon)], {icon: cowMarker_1});
                 map.addLayer(markerR);
 
-                polylinePoints = [[latR, lonR], [lat, lon] ]
+                /*polylinePoints = [[latR, lonR], [lat, lon] ]
                 if (latR !== 0){
                     polyline = L.polyline(polylinePoints).addTo(map)
-                }
+                }*/
 
 
                 latR = responseJson.lat;
@@ -155,10 +155,10 @@ async function getData(){
                 markerB = new L.marker([parseFloat(responseJson.lat), parseFloat(responseJson.lon)], {icon: cowMarker_2});
                 map.addLayer(markerB);
 
-                polylinePoints = [[latB, lonB], [lat, lon] ]
-                if (latB !== 0){
+                /*polylinePoints = [[latB, lonB], [lat, lon] ]
+                if (latR !== 0){
                     polyline = L.polyline(polylinePoints).addTo(map)
-                }
+                }*/
 
 
                 latB = responseJson.lat;
