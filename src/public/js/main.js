@@ -135,6 +135,13 @@ async function getData(){
                 map.removeLayer(markerR);
                 markerR = new L.marker([parseFloat(responseJson.lat), parseFloat(responseJson.lon)], {icon: cowMarker_1});
                 map.addLayer(markerR);
+
+                polylinePoints = [[latR, lonR], [lat, lon] ]
+                if (latR !== 0){
+                    polyline = L.polyline(polylinePoints).addTo(map)
+                }
+
+
                 latR = responseJson.lat;
                 lonR = responseJson.lon
                 document.getElementById("idCow1").innerHTML = responseJson.id;
@@ -147,6 +154,13 @@ async function getData(){
                 map.removeLayer(markerB);
                 markerB = new L.marker([parseFloat(responseJson.lat), parseFloat(responseJson.lon)], {icon: cowMarker_2});
                 map.addLayer(markerB);
+
+                polylinePoints = [[latB, lonB], [lat, lon] ]
+                if (latB !== 0){
+                    polyline = L.polyline(polylinePoints).addTo(map)
+                }
+
+
                 latB = responseJson.lat;
                 lonB = responseJson.lon
                 document.getElementById("idCow2").innerHTML = responseJson.id;
