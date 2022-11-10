@@ -100,10 +100,10 @@ let lat = 0;
 let lon = 0;
 let prelat = 0;
 let prelon = 0;
-var latR
-var lonR
-var latB
-var lonB
+var latR = 0;
+var lonR = 0;
+var latB = 0;
+var lonB = 0;
 var active_polyline = L.featureGroup().addTo(map);
 let cowRegister = []
 
@@ -122,10 +122,10 @@ async function getData(){
     lon = parseFloat(responseJson.lon);
 
     if(document.getElementById("statusCow1").innerHTML === 'offline'){
-        document.getElementById("histCow1").disabled = true;
+        document.getElementById("histCow1").disabled = false;
     }
     if(document.getElementById("statusCow2").innerHTML === 'offline'){
-        document.getElementById("histCow2").disabled = true;
+        document.getElementById("histCow2").disabled = false;
     }
 
     let x;
@@ -135,32 +135,48 @@ async function getData(){
                 map.removeLayer(markerR);
                 markerR = new L.marker([parseFloat(responseJson.lat), parseFloat(responseJson.lon)], {icon: cowMarker_1});
                 map.addLayer(markerR);
-                latR = responseJson.lat;
-                lonR = responseJson.lon
+
                 document.getElementById("idCow1").innerHTML = responseJson.id;
                 x = document.getElementById("statusCow1")
                 x.innerHTML = "• online";
                 document.getElementById("histCow1").disabled = false;
                 x.style="text-style: normal; color: lawngreen; font-weight: bold"
 
+                polylinePoints = [[latR, lonR], [lat, lon]]
+
+                if (prelat !== 0){
+                    polyline = L.polyline(polylinePoints).addTo(map)
+                }
+
+                latR = responseJson.lat;
+                lonR = responseJson.lon
+
             } else if (responseJson.id === cowRegister[1]) {
                 map.removeLayer(markerB);
                 markerB = new L.marker([parseFloat(responseJson.lat), parseFloat(responseJson.lon)], {icon: cowMarker_2});
                 map.addLayer(markerB);
-                latB = responseJson.lat;
-                lonB = responseJson.lon
+
                 document.getElementById("idCow2").innerHTML = responseJson.id;
                 x = document.getElementById("statusCow2")
                 x.innerHTML = "• online";
                 document.getElementById("histCow2").disabled = false;
                 x.style="text-style: normal; color: lawngreen; font-weight: bold"
 
+                polylinePoints = [[latB, lonB], [lat, lon]]
+
+                if (latB !== 0){
+                    polyline = L.polyline(polylinePoints).addTo(map)
+                }
+
+                latB = responseJson.lat;
+                lonB = responseJson.lon
+
             }
         } catch (e) {
             console.log(e)
         }
 
-        /*polylinePoints = [[prelat, prelon], [lat, lon] ]
+        /*polylinePoints = [[prelat, prelon], [lat, lon]]
 
         if (prelat !== 0){
             polyline = L.polyline(polylinePoints).addTo(map)
