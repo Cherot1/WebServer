@@ -121,13 +121,6 @@ async function getData(){
     lat = parseFloat(responseJson.lat);
     lon = parseFloat(responseJson.lon);
 
-    if(document.getElementById("statusCow1").innerHTML === 'offline'){
-        document.getElementById("histCow1").disabled = true;
-    }
-    if(document.getElementById("statusCow2").innerHTML === 'offline'){
-        document.getElementById("histCow2").disabled = true;
-    }
-
     let x;
     if (responseJson.lat !== 0) {
         try {
